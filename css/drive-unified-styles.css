@@ -1,0 +1,482 @@
+/* Drive Unified Styles - Consolidation of all drive-related styling */
+
+/* === Drive Product Modal/Card Styles === */
+.drive-product-container {
+    transition: all 0.3s ease;
+}
+
+.drive-product-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.drive-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.drive-product-header {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.drive-product-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.drive-product-body {
+    padding: 1.5rem;
+}
+
+.drive-product-image-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.drive-product-image {
+    max-width: 180px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    margin: 0 auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.drive-product-image:hover {
+    transform: scale(1.02);
+}
+
+/* Product Description Section */
+.drive-product-description {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e2e8f0;
+}
+
+.drive-product-description-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+    display: flex;
+    align-items: center;
+}
+
+.drive-product-description-title::before {
+    content: "📋";
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.drive-product-description-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Button-like Pricing Display */
+.drive-product-pricing {
+    margin-bottom: 1.5rem;
+}
+
+.drive-pricing-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.drive-price-tag,
+.drive-commission-tag {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+.drive-price-tag {
+    border-color: #3b82f6;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
+}
+
+.drive-price-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+}
+
+.drive-commission-tag {
+    border-color: #10b981;
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+}
+
+.drive-commission-tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.15);
+}
+
+.drive-price-label,
+.drive-commission-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.drive-price-label {
+    color: #1d4ed8;
+}
+
+.drive-commission-label {
+    color: #059669;
+}
+
+.drive-price-value,
+.drive-commission-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.drive-price-value {
+    color: #1e40af;
+}
+
+.drive-commission-value {
+    color: #047857;
+}
+
+.drive-price-currency,
+.drive-commission-currency {
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Net Result Display */
+.drive-net-result {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 2px solid #10b981;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.drive-net-result::before {
+    content: "🎉";
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.drive-net-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #059669;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.drive-net-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #047857;
+    margin: 0;
+}
+
+.drive-net-note {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #065f46;
+    opacity: 0.8;
+    display: block;
+    margin-top: 0.25rem;
+}
+
+/* Enhanced Purchase Button */
+.drive-purchase-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    padding: 1.25rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.drive-purchase-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.drive-purchase-btn:hover::before {
+    left: 100%;
+}
+
+.drive-purchase-btn:hover {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+}
+
+.drive-purchase-btn:disabled {
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.drive-purchase-btn:disabled::before {
+    display: none;
+}
+
+/* === Drive Progress Styles === */
+.drive-progress-container {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.drive-progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.drive-progress-header h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.drive-status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+.drive-progress-content {
+    padding: 1.5rem;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.progress-stat {
+    text-align: center;
+}
+
+.progress-stat .stat-number {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.progress-stat .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.progress-bar-container .progress {
+    height: 8px;
+    background-color: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-container .progress-bar {
+    transition: width 0.6s ease;
+    border-radius: 4px;
+}
+
+.progress-label {
+    text-align: center;
+}
+
+.commission-summary {
+    background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.commission-earned strong {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #059669;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.commission-earned small {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #065f46;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Enhanced tasks completed card styling */
+#dynamic-tasks-card {
+    transition: all 0.3s ease;
+}
+
+#dynamic-tasks-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+#dynamic-tasks-card .stat-icon.warning {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    color: white;
+}
+
+/* Animation classes for dynamic updates */
+@keyframes highlight-update {
+    0% { background-color: #fef3c7; }
+    100% { background-color: transparent; }
+}
+
+.highlight-update {
+    animation: highlight-update 1s ease-out;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+    .drive-product-card {
+        margin: 0 1rem;
+    }
+    
+    .drive-product-body {
+        padding: 1rem;
+    }
+    
+    .drive-product-image {
+        max-width: 120px;
+    }
+    
+    .drive-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .drive-purchase-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .progress-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .drive-progress-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .drive-stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .drive-product-actions {
+        flex-direction: column;
+    }
+}
+
+/* === Animation Effects === */
+.drive-fade-in {
+    animation: driveFadeIn 0.3s ease-in-out;
+}
+
+@keyframes driveFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.drive-scale-in {
+    animation: driveScaleIn 0.3s ease-in-out;
+}
+
+@keyframes driveScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* === Override Conflicting Styles === */
+/* Reset any conflicting modal styles for drive components */
+.drive-product-container .modal,
+.drive-product-container .product-modal,
+.drive-product-container .product-modal-content {
+    all: unset;
+    display: block !important;
+}
+
+/* Ensure drive styles take precedence */
+[class*="drive-"] {
+    font-family: 'Inter', sans-serif !important;
+}

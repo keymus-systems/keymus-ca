@@ -1,0 +1,127 @@
+<!-- Standard Header Navigation Component -->
+<div class="standard-header">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+            <div class="text-center flex-grow-1">
+                <h2 class="mb-0 fw-bold page-title" id="header-title">Page Title</h2>
+                <p class="mb-0 opacity-75 page-subtitle" id="header-subtitle">Page subtitle</p>
+            </div>
+            <button class="menu-btn" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+.standard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn, .menu-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.back-btn:hover, .menu-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.page-subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.2rem;
+    }
+    
+    .page-subtitle {
+        font-size: 0.8rem;
+    }
+}
+</style>
+
+<script>
+// Function to set header content
+function setHeaderContent(title, subtitle = '') {
+    const titleElement = document.getElementById('header-title');
+    const subtitleElement = document.getElementById('header-subtitle');
+    
+    if (titleElement) {
+        titleElement.textContent = title;
+    }
+    
+    if (subtitleElement) {
+        subtitleElement.textContent = subtitle;
+        subtitleElement.style.display = subtitle ? 'block' : 'none';
+    }
+}
+
+// Function to toggle sidebar
+function toggleSidebar() {
+    // Use the global toggleSidebar function if available, otherwise fallback
+    if (typeof window.toggleSidebar === 'function') {
+        window.toggleSidebar();
+    } else {
+        // Fallback implementation
+        const sidebar = document.querySelector('.main-sidebar');
+        if (sidebar) {
+            sidebar.classList.toggle('active');
+            
+            // Also toggle overlay if it exists
+            const overlay = document.querySelector('.bg-overlay');
+            if (overlay) {
+                overlay.classList.toggle('active');
+            }
+        }
+    }
+}
+
+// Auto-set title based on page
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+    
+    const pageTitles = {
+        'dashboard': { title: 'Dashboard', subtitle: 'Welcome back to your dashboard' },
+        'task': { title: 'Tasks', subtitle: 'Complete tasks and earn rewards' },
+        'withdraws': { title: 'Withdrawals', subtitle: 'Manage your withdrawals and view history' },
+        'deposits': { title: 'Deposits', subtitle: 'Add funds to your account' },
+        'orders': { title: 'Orders', subtitle: 'View your order history' },
+        'account': { title: 'Account', subtitle: 'Manage your account settings' },
+        'profile': { title: 'Profile', subtitle: 'Update your profile information' },
+        'notifications': { title: 'Notifications', subtitle: 'View your latest notifications' }
+    };
+    
+    const pageInfo = pageTitles[currentPage];
+    if (pageInfo) {
+        setHeaderContent(pageInfo.title, pageInfo.subtitle);
+    }
+});
+</script>

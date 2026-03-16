@@ -1,0 +1,204 @@
+<!-- Dashboard Header -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <img src="./assets/uploads/keymus/keymus-logo.jpg" alt="Keymus Ecommerce Logo" style="height: 32px;">
+        </div>
+        <div class="header-actions">
+            <button class="notification-btn" id="notificationBtn" onclick="window.location.href='./chat/'">
+                <i class="far fa-bell"></i>
+                <span class="notification-badge" id="notificationCount" style="position: absolute; top: -5px; right: -5px; background: var(--danger-red, #FF3B30); color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: 600;">0</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">
+                    <span id="userInitials"></span>
+                </div>
+                <div class="user-details">
+                    <h6 id="dashboardUsername"></h6>
+                    <p id="userBadgeNumber"></p>
+                </div>
+            </div>
+            <button class="login-btn" id="loginBtn" onclick="window.location.href='./login.html'" style="display: none;">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<style>
+/* Header */
+.header {
+    background: var(--card-background);
+    padding: 0.1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+/* Hide standalone menu buttons when dashboard header is present */
+body > .menu-btn:not(.header .menu-btn) {
+    display: none !important;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: var(--background);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.user-details h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.user-details p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.notification-btn {
+    position: relative;
+    background: var(--background);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.notification-btn:hover {
+    background: var(--border-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.login-btn {
+    background: var(--primary-blue);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: var(--secondary-blue);
+    transform: translateY(-1px);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--danger-red, #FF3B30);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+</style>
+
+<script>
+// Ensure menu button in dashboard header is connected to sidebar
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for the header to be fully loaded
+    setTimeout(function() {
+        const menuBtn = document.getElementById('menuBtn');
+        if (menuBtn) {
+            console.log('Dashboard header menu button found, attaching click handler');
+            menuBtn.addEventListener('click', function(e) {
+                console.log('Dashboard header menu button clicked');
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Try multiple methods to ensure sidebar opens
+                if (typeof window.toggleSidebar === 'function') {
+                    console.log('Using window.toggleSidebar');
+                    window.toggleSidebar();
+                } else if (window.SidebarManager && typeof window.SidebarManager.open === 'function') {
+                    console.log('Using SidebarManager.open');
+                    window.SidebarManager.open();
+                } else if (typeof window.openSidebar === 'function') {
+                    console.log('Using window.openSidebar');
+                    window.openSidebar();
+                } else {
+                    console.error('No sidebar toggle function available');
+                    // Fallback: manually toggle sidebar
+                    const sidebar = document.querySelector('.main-sidebar');
+                    if (sidebar) {
+                        console.log('Manually toggling sidebar');
+                        sidebar.classList.toggle('active');
+                    }
+                }
+            });
+        } else {
+            console.error('Menu button not found in dashboard header');
+        }
+    }, 100);
+});
+</script>

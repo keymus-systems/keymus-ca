@@ -1,0 +1,438 @@
+/* Enhanced Order Progress Component - Matching the provided design */
+
+/* === Order Progress Card === */
+.order-progress-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+}
+
+.order-progress-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 16px 16px 0 0;
+}
+
+.order-progress-header {
+    margin-bottom: 2rem;
+}
+
+.order-progress-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.order-progress-subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* === Horizontal Progress Steps === */
+.order-progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin: 2rem 0;
+    padding: 0 1rem;
+}
+
+.order-progress-line {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    right: 2rem;
+    height: 4px;
+    background: #f1f5f9;
+    z-index: 1;
+    border-radius: 2px;
+    transform: translateY(-50%);
+}
+
+.order-progress-line-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.order-progress-line-fill::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: #f59e0b;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 3px #fff, 0 0 0 5px #f59e0b40;
+    animation: progressPulse 2s infinite;
+}
+
+@keyframes progressPulse {
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.2); }
+}
+
+.order-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 60px;
+}
+
+.order-step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #fff;
+    border: 3px solid #e2e8f0;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
+}
+
+.order-step-circle.completed {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-color: #10b981;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+}
+
+.order-step-circle.current {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    border-color: #f59e0b;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+    transform: scale(1.1);
+    animation: currentStepPulse 2s infinite;
+}
+
+.order-step-circle.pending {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+    color: #94a3b8;
+}
+
+@keyframes currentStepPulse {
+    0%, 100% { 
+        transform: scale(1.1); 
+        box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+    }
+    50% { 
+        transform: scale(1.15); 
+        box-shadow: 0 6px 25px rgba(245, 158, 11, 0.6);
+    }
+}
+
+.order-step-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.2;
+    font-family: 'Inter', sans-serif;
+}
+
+.order-step-label.completed {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.order-step-label.current {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+/* === Task Counters Section === */
+.order-task-counters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #f1f5f9;
+}
+
+.task-counter-card {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.task-counter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.task-counter-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+.task-counter-card:hover::before {
+    transform: scaleX(1);
+}
+
+.task-counter-card.completed::before {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.task-counter-card.pending::before {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.task-counter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.task-counter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.task-counter-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #fff;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+}
+
+.task-counter-card.completed .task-counter-icon {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.task-counter-card.pending .task-counter-icon {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.task-counter-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1;
+}
+
+.task-counter-card.completed .task-counter-value {
+    color: #10b981;
+}
+
+.task-counter-card.pending .task-counter-value {
+    color: #f59e0b;
+}
+
+.task-counter-description {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0.5rem 0 0 0;
+    line-height: 1.4;
+}
+
+/* === Progress Statistics === */
+.order-progress-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.progress-stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.progress-stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.progress-stat-label {
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
+    .order-progress-card {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .order-progress-steps {
+        margin: 1.5rem 0;
+        padding: 0 0.5rem;
+    }
+    
+    .order-progress-line {
+        left: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .order-step-circle {
+        width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
+    }
+    
+    .order-step-label {
+        font-size: 0.7rem;
+    }
+    
+    .order-task-counters {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+    
+    .task-counter-card {
+        padding: 1rem;
+    }
+    
+    .task-counter-value {
+        font-size: 1.75rem;
+    }
+    
+    .order-progress-stats {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .progress-stat-item {
+        flex: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-progress-steps {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .order-progress-line {
+        display: none;
+    }
+    
+    .order-step {
+        min-width: 50px;
+    }
+    
+    .order-step-circle {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+    }
+}
+
+/* === Animation Utilities === */
+.order-progress-animate-in {
+    animation: orderProgressSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes orderProgressSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.order-progress-update {
+    animation: orderProgressUpdate 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes orderProgressUpdate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* === Integration with Existing System === */
+.drive-product-container .order-progress-card {
+    margin-bottom: 1.5rem;
+}
+
+.task-section .order-progress-card {
+    margin-top: 1rem;
+}
+
+/* === Loading State === */
+.order-progress-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.order-progress-loading .order-progress-steps {
+    animation: progressLoading 1.5s infinite;
+}
+
+@keyframes progressLoading {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}

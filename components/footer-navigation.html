@@ -1,0 +1,70 @@
+<!-- Standard Footer Navigation Component -->
+<footer class="sticky-footer bg-white border-top">
+    <div class="container-fluid">
+        <div class="footer-bar py-2">
+            <div class="d-flex justify-content-around align-items-center">
+                <a href="./dashboard.html" class="footer-link text-decoration-none" data-page="dashboard">
+                    <div class="text-center">
+                        <div class="footer-icon mb-1">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="footer-text" data-i18n="footerHomeLink">Home</div>
+                    </div>
+                </a>
+                <a href="./task.html" class="footer-link text-decoration-none" data-page="task">
+                    <div class="text-center">
+                        <div class="footer-icon mb-1">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="footer-text" data-i18n="footerTasksLink">Tasks</div>
+                    </div>
+                </a>
+                <a href="./orders.html" class="footer-link text-decoration-none" data-page="orders">
+                    <div class="text-center">
+                        <div class="footer-icon mb-1">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="footer-text" data-i18n="footerOrdersLink">Orders</div>
+                    </div>
+                </a>
+                <a href="./account.html" class="footer-link text-decoration-none" data-page="account">
+                    <div class="text-center">
+                        <div class="footer-icon mb-1">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="footer-text" data-i18n="footerAccountLink">Account</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Auto-highlight active footer link based on current page
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
+    const footerLinks = document.querySelectorAll('.footer-link[data-page]');
+    
+    footerLinks.forEach(link => {
+        const linkPage = link.getAttribute('data-page');
+        if (currentPage === linkPage || 
+            (currentPage === 'dashboard' && linkPage === 'dashboard') ||
+            (currentPage === 'task' && linkPage === 'task') ||
+            (currentPage === 'orders' && linkPage === 'orders') ||
+            (currentPage === 'account' && linkPage === 'account')) {
+            link.classList.add('active');
+        }
+    });
+    
+    // Special case for account-related pages - highlight account
+    if (currentPage === 'withdraws' || currentPage === 'deposits' || currentPage === 'profile' || 
+        currentPage === 'memberships' || currentPage === 'certificates' || currentPage === 'events' ||
+        currentPage === 'notifications') {
+        const accountLink = document.querySelector('.footer-link[data-page="account"]');
+        if (accountLink) {
+            accountLink.classList.add('active');
+        }
+    }
+});
+</script>

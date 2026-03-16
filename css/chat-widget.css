@@ -1,0 +1,188 @@
+/* Floating Chat Widget Styles */
+.floating-chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    pointer-events: auto;
+}
+
+.chat-widget-button {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #007AFF, #5AC8FA);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    border: none;
+    outline: none;
+}
+
+.chat-widget-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 122, 255, 0.4);
+}
+
+.chat-widget-button:active {
+    transform: scale(0.95);
+}
+
+.chat-widget-button i {
+    color: white;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.chat-widget-button:hover i {
+    transform: scale(1.1);
+}
+
+.chat-notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #FF3B30;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+}
+
+.chat-widget-tooltip {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.chat-widget-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.8);
+}
+
+.floating-chat-widget:hover .chat-widget-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .floating-chat-widget {
+        bottom: 80px; /* Move higher to avoid potential bottom navigation/account icons */
+        right: 15px;
+    }
+    
+    .chat-widget-button {
+        width: 50px; /* Smaller on mobile to be less intrusive */
+        height: 50px;
+    }
+    
+    .chat-widget-button i {
+        font-size: 20px; /* Smaller icon on mobile */
+    }
+    
+    .chat-notification-badge {
+        min-width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+    
+    .chat-widget-tooltip {
+        font-size: 12px;
+        padding: 5px 8px;
+        bottom: 60px; /* Adjust tooltip position */
+    }
+}
+
+/* Animation for when widget appears */
+@keyframes chatWidgetAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.floating-chat-widget {
+    animation: chatWidgetAppear 0.5s ease-out;
+}
+
+/* Pulse animation for notification badge */
+@keyframes badgePulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chat-notification-badge[style*="display: flex"] {
+    animation: badgePulse 2s infinite;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .chat-widget-button {
+        border: 2px solid #000;
+    }
+    
+    .chat-widget-tooltip {
+        background: #000;
+        border: 1px solid #fff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .chat-widget-button,
+    .chat-widget-button i,
+    .chat-widget-tooltip {
+        transition: none;
+    }
+    
+    .floating-chat-widget {
+        animation: none;
+    }
+    
+    .chat-notification-badge {
+        animation: none;
+    }
+    
+    .chat-widget-button:hover {
+        transform: none;
+    }
+}

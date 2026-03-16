@@ -1,0 +1,135 @@
+/* Sticky Footer Navigation CSS */
+
+/* Add padding to body to account for sticky footer */
+body {
+    padding-bottom: 80px !important; /* Adjust based on footer height */
+}
+
+/* Ensure main content doesn't overlap with sticky footer */
+.main-content, .container, .container-fluid {
+    margin-bottom: 20px;
+}
+
+/* Sticky footer specific styles */
+.sticky-footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1030 !important;
+    background-color: #ffffff !important;
+    border-top: 1px solid #dee2e6 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure footer content is properly spaced */
+.sticky-footer .footer-bar {
+    padding: 12px 0 !important;
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Better spacing between footer items */
+.sticky-footer .d-flex {
+    gap: 1.5rem !important; /* Add spacing between nav items */
+    width: 100%;
+    max-width: 400px; /* Limit max width for better distribution */
+    margin: 0 auto;
+}
+
+/* Footer link styles for sticky footer */
+.sticky-footer .footer-link {
+    color: #6c757d;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    padding: 8px 12px; /* Add padding around each link */
+    border-radius: 8px; /* Rounded corners for better touch targets */
+    min-width: 60px; /* Ensure minimum touch target size */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sticky-footer .footer-link:hover, 
+.sticky-footer .footer-link.active {
+    color: #667eea;
+    background-color: rgba(102, 126, 234, 0.1); /* Subtle background on hover/active */
+}
+
+.sticky-footer .footer-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    margin-bottom: 4px; /* Space between icon and text */
+}
+
+.sticky-footer .footer-link:hover .footer-icon, 
+.sticky-footer .footer-link.active .footer-icon {
+    transform: translateY(-2px);
+}
+
+.sticky-footer .footer-text {
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* Active state highlighting */
+.sticky-footer .footer-link.active {
+    color: #667eea;
+    background-color: rgba(102, 126, 234, 0.15) !important; /* Slightly stronger background for active state */
+}
+
+.sticky-footer .footer-link.active .footer-icon {
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.sticky-footer .footer-link.active .footer-text {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 75px !important;
+    }
+    
+    .sticky-footer .d-flex {
+        gap: 1rem !important; /* Reduce spacing on mobile */
+        max-width: 100%;
+    }
+    
+    .sticky-footer .footer-bar {
+        padding: 10px 0 !important;
+        min-height: 60px;
+    }
+      .sticky-footer .footer-link {
+        padding: 6px 8px; /* Smaller padding on mobile */
+        min-width: 50px;
+    }
+    
+    .sticky-footer .footer-icon {
+        font-size: 1.1rem;
+    }
+    
+    .sticky-footer .footer-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* Prevent content from jumping when footer loads */
+#footer-navigation {
+    min-height: 65px;
+}
+
+/* Extra spacing for last elements to prevent overlap */
+.content-wrapper:last-child,
+.card:last-child,
+.row:last-child {
+    margin-bottom: 30px !important;
+}

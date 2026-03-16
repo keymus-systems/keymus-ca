@@ -1,0 +1,674 @@
+/* Dashboard Custom Styles */
+:root {
+    --primary-blue: #007AFF;
+    --secondary-blue: #5AC8FA;
+    --success-green: #30D158;
+    --warning-orange: #FF9500;
+    --danger-red: #FF3B30;
+    --purple: #5856D6;
+    --pink: #FF2D92;
+    --background: #F2F2F7;
+    --card-background: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --border-color: #E5E5EA;
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Header */
+.header {
+    background: var(--card-background);
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: var(--background);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* Product Carousel */
+#product-carousel-container { 
+    position: relative; 
+    width: 100%; 
+    margin: 32px auto 24px auto; 
+    max-width: 1200px; 
+    overflow: hidden; /* Hide overflow for seamless loop */
+}
+
+.carousel-title { 
+    font-size: 1.3rem; 
+    font-weight: 600; 
+    margin-bottom: 12px; 
+}
+
+#product-carousel {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 0;
+    width: fit-content;
+    animation: infinite-scroll 40s linear infinite;
+}
+
+/* Pause animation on hover */
+#product-carousel:hover {
+    animation-play-state: paused;
+}
+
+/* Keyframe for infinite scroll */
+@keyframes infinite-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.product-card {
+    min-width: 220px;
+    max-width: 220px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 12px 16px 12px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: #f7f7f7;
+    margin-bottom: 12px;
+}
+
+.product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #97968c, #777676);
+    color: #fffefe;
+    font-size: 0.75rem;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 8px 0 12px 0;
+    text-align: center;
+    min-height: 40px;
+    line-height: 1.3;
+    color: #333;
+}
+
+.product-price-btn {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0,122,255,0.3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.product-commission-btn {
+    background: linear-gradient(135deg, var(--success-green), #28a745);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(48,209,88,0.3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .product-price-btn {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,122,255,0.4);
+}
+
+.product-card:hover .product-commission-btn {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(48,209,88,0.4);
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+#carousel-left, #carousel-right {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    background: #fff;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #0002;
+    transition: all 0.3s ease;
+}
+
+#carousel-left:hover, #carousel-right:hover {
+    background: #f8f9fa;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+#carousel-left {
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+#carousel-right {
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+#carousel-left:active, #carousel-right:active {
+    background: #f0f0f0;
+}
+
+/* Partners Carousel */
+#partners-carousel-container { 
+    position: relative; 
+    width: 100%; 
+    margin: 32px auto 24px auto; 
+    max-width: 1200px; 
+    overflow: hidden;
+}
+
+#partners-carousel {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 0;
+    width: fit-content;
+    animation: partners-infinite-scroll 30s linear infinite;
+}
+
+#partners-carousel:hover {
+    animation-play-state: paused;
+}
+
+@keyframes partners-infinite-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.partner-card {
+    min-width: 180px;
+    max-width: 180px;
+    height: 120px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.partner-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+.partner-card img {
+    max-width: 100%;
+    max-height: 80px;
+    object-fit: contain;
+    filter: grayscale(20%);
+    transition: all 0.3s ease;
+}
+
+.partner-card:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.partner-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,122,255,0.05), rgba(90,200,250,0.05));
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.partner-card:hover::before {
+    opacity: 1;
+}
+
+/* Referral Section with Overlay Card Style */
+.referral-hero-section {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.referral-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('./assets/uploads/images/Drive/referral-bg.jpg') center/cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.referral-overlay-card {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.referral-overlay-card .referral-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.referral-overlay-card .referral-code {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    padding: 0.5rem;
+    background: var(--background);
+    border-radius: 8px;
+    border: 2px dashed var(--primary-blue);
+}
+
+.referral-copy-btn {
+    transition: all 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.referral-copy-btn:hover {
+    background: #0056d6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+}
+
+.referral-copy-btn.copied {
+    background: var(--success-green);
+}
+
+.referral-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.referral-stat {
+    text-align: center;
+}
+
+.referral-stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 4px;
+}
+
+.referral-stat-label {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Drive Progress Modal */
+.detailed-progress-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    z-index: 999999;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: 0 auto;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-header {
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    padding: 1rem 2rem 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Drive Progress Grid */
+.drive-progress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Mobile responsiveness for referral section */
+@media (max-width: 768px) {
+    .referral-hero-section {
+        min-height: 150px;
+        margin-bottom: 1.5rem;
+    }
+
+    .referral-overlay-card {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .referral-overlay-card .referral-code {
+        font-size: 1.25rem;
+        letter-spacing: 1px;
+    }
+
+    .referral-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .referral-stat {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .referral-stat-number {
+        font-size: 1.25rem;
+        margin-bottom: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .transaction-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .progress-circles {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .balance-amount {
+        font-size: 2rem;
+    }
+
+    /* Mobile adjustments for carousels */
+    #product-carousel-container, #partners-carousel-container {
+        margin: 20px auto 16px auto;
+        padding: 0 10px;
+    }
+
+    .carousel-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .product-card {
+        min-width: 180px;
+        max-width: 180px;
+        padding: 14px 10px 12px 10px;
+    }
+
+    .product-card img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 8px;
+    }
+
+    .partner-card {
+        min-width: 150px;
+        max-width: 150px;
+        height: 100px;
+        padding: 15px;
+    }
+
+    .partner-card img {
+        max-height: 60px;
+    }
+
+    #product-carousel {
+        gap: 16px;
+    }
+
+    #partners-carousel {
+        gap: 20px;
+    }
+
+    /* Enhanced transaction cards mobile adjustments */
+    .transaction-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .transaction-card {
+        padding: 1rem;
+    }
+
+    .transaction-card-image {
+        height: 100px;
+    }
+
+    .transaction-card-content {
+        padding: 1rem;
+    }
+
+    .transaction-card h6 {
+        font-size: 0.9rem;
+    }
+
+    .transaction-card p {
+        font-size: 1.1rem;
+    }
+
+    .transaction-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    /* Quick actions mobile adjustments */
+    .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .quick-action-image {
+        height: 80px;
+    }
+
+    .quick-action-content {
+        padding: 0.75rem;
+    }
+
+    .quick-action-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    /* Drive progress grid mobile adjustments */
+    .drive-progress-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .modal-content {
+        margin: 20px auto;
+        max-height: 95vh;
+        top: 0;
+        transform: none;
+    }
+
+    .modal-header, .modal-body, .modal-footer {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+}
+
+/* Footer spacing */
+.main-content {
+    padding-bottom: 2rem;
+}

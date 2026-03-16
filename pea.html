@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>PEA Program - Keymus Ecommerce</title>
+    <link rel="icon" type="image/png" href="assets/uploads/keymus/keymus-logo.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="css/public-pages.css" rel="stylesheet">
+    <style>        
+        .pea-hero {
+            background: url('assets/uploads/keymus/pea-hero.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pea-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        
+        .pea-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pea-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+        
+        .pea-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+        
+        .launch-btn {
+            background: linear-gradient(45deg, #FF6B00, #FF8533);
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.3);
+        }
+        
+        .launch-btn:hover {
+            background: linear-gradient(45deg, #E55A00, #FF6B00);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 0, 0.4);
+            color: white;
+        }
+        
+        .pea-features {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #FF6B00, #FF8533);
+            transform: scaleX(0);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #FF6B00, #FF8533);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-image img {
+            transform: scale(1.05);
+        }
+        
+        .pea-benefits {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #FF6B00;
+        }
+        
+        .benefit-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+        
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #FF6B00, #FF8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .pea-stats {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #FF6B00;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .pea-cta {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #FF6B00, #FF8533);
+            color: white;
+            text-align: center;
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }        @media (max-width: 768px) {
+            .pea-title {
+                font-size: 3rem;
+            }
+            
+            .pea-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .benefit-item {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+        }        /* Styles for Tap Into a New Income Source section */
+        .income-source {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .income-source::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 107, 0, 0.1));
+            z-index: 1;
+        }
+        
+        .income-source .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-icon {
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .asset-display {
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .asset-display:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1) !important;
+        }
+        
+        .trend-indicator {
+            font-size: 0.8rem;
+            line-height: 1.2;
+        }
+        
+        .chart-container {
+            margin: 20px 0;
+        }
+        
+        .chart-line path {
+            filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.2));
+        }
+        
+        .feature-item {
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+            border-color: rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        
+        .features-grid {
+            padding-left: 2rem;
+        }
+          /* Styles for Secure Position and Access Level sections */
+        .secure-position {
+            position: relative;
+        }
+        
+        .position-content {
+            padding-right: 2rem;
+        }
+        
+        .feature-item {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .feature-dot {
+            flex-shrink: 0;
+        }
+        
+        .position-image img {
+            transition: transform 0.3s ease;
+        }
+        
+        .position-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .access-level {
+            position: relative;
+        }
+        
+        .access-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .access-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+            border-color: rgba(0,123,255,0.3);
+        }
+        
+        .access-card.border-primary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .access-card.border-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #007bff, #0056b3);
+        }
+        
+        .icon-circle {
+            transition: all 0.3s ease;
+        }
+        
+        .access-card:hover .icon-circle {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .access-features ul li {
+            transition: all 0.3s ease;
+        }
+        
+        .access-card:hover .access-features ul li {
+            color: #495057;
+        }
+        
+        @media (max-width: 991px) {
+            .position-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+            
+            .access-card {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>    <!-- Header Component -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="pea-hero">
+        <div class="floating-elements">
+            <div class="floating-element">
+                <i class="fas fa-chart-line fa-3x"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-users fa-3x"></i>
+            </div>
+            <div class="floating-element">
+                <i class="fas fa-rocket fa-3x"></i>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="pea-title">
+                        Explore the<br>
+                        <span style="color: #FFD700;">PEA</span><br>
+                        Program
+                    </h1>
+                    <p class="pea-subtitle">
+                        Product Engagement Associate - Your pathway to success in affiliate marketing
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#features" class="btn launch-btn btn-lg">
+                            Get Started <i class="fas fa-arrow-down ms-2"></i>
+                        </a>
+                        <a href="#benefits" class="btn btn-outline-light btn-lg">
+                            Learn More <i class="fas fa-play ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- What is the PEA Program Section -->
+    <section id="features" class="pea-features">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-4 fw-bold mb-4">What is the PEA Program?</h2>
+                    <p class="lead text-muted">
+                        The Product Engagement Associate (PEA) Program is a structured way to earn through digital work while supporting real eCommerce businesses. PEAs help store owners boost product visibility and trust across top platforms like Amazon, eBay, and Shopify by participating in a verified, performance-driven system.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How PEAs Boost Product Visibility Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">How PEAs Boost Product Visibility</h2>
+                    <p class="lead mb-4">
+                        At the core of the program is a method called sales prototyping. PEAs make refundable purchases of selected products through live online stores. These transactions are tracked by the platform, helping improve search rankings and build social proof signals like "purchased recently" or "bought by thousands."
+                    </p>
+                    
+                    <h3 class="h4 fw-bold mb-3">Every PEA:</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Receives a full refund for each approved product</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Earns a commission per engagement</li>
+                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Has all transactions securely processed through Keymus</li>
+                    </ul>
+                      <p class="lead">
+                        This creates momentum for the product and trust for future buyers, while rewarding PEAs for their role in the process.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Earning Model Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">Earning Model</h2>
+                    <p class="lead mb-4">
+                        PEAs can engage with products daily, within a limit set by their membership level. This system ensures fairness across the platform.
+                    </p>
+                    
+                    <h3 class="h4 fw-bold mb-3">For each product engagement:</h3>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><i class="fas fa-dollar-sign text-success me-2"></i> A commission is earned</li>
+                        <li class="mb-2"><i class="fas fa-undo text-success me-2"></i> A full refund is issued</li>
+                        <li class="mb-2"><i class="fas fa-money-bill-wave text-success me-2"></i> A base salary is also paid by Keymus</li>
+                    </ul>
+                    
+                    <p class="lead">
+                        This combination creates a stable, scalable income model that works for both part-time users and those more committed.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flexible and Reliable Work Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2 class="display-5 fw-bold mb-4">Flexible and Reliable Work</h2>
+                    <p class="lead">
+                        The PEA Program is not gig work or basic task-hunting. It's a structured platform that supports real businesses and rewards consistency. Whether you're a student, business owner, or full-time professional, the flexible format allows you to earn without disrupting your schedule.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Why Choose PEA Section -->
+    <section id="benefits" class="pea-benefits">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="display-4 fw-bold mb-5">Why Choose PEA?</h2>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Accelerated Growth</h5>
+                            <p class="mb-0">Fast-track your affiliate marketing success with proven strategies and systems.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Risk-Free Start</h5>
+                            <p class="mb-0">Begin your PEA journey with no upfront costs and minimal risk investment.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Recognition & Rewards</h5>
+                            <p class="mb-0">Earn badges, certificates, and exclusive rewards as you achieve milestones.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-2">Flexible Schedule</h5>
+                            <p class="mb-0">Work at your own pace and manage your PEA activities around your lifestyle.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="position-relative">
+                        <img src="assets/uploads/images/Drive/happy-team.jpeg" alt="PEA Benefits" class="img-fluid rounded-4 shadow-lg">
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            <button class="btn btn-light btn-lg rounded-circle" style="width: 80px; height: 80px;">
+                                <i class="fas fa-play text-primary fa-2x"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="pea-stats">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="3000">0</span>
+                        <div class="stat-label">Active PEAs</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="100">0</span>
+                        <div class="stat-label">% Above minimum wage</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="100">0</span>
+                        <div class="stat-label">% Online</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-card">
+                        <span class="stat-number" data-count="24">0</span>
+                        <div class="stat-label">Support Hours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Tap Into a New Income Source Section -->
+    <section class="income-source py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="income-content">
+                        <div class="section-icon mb-4">
+                            <i class="fas fa-chart-line fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="display-5 fw-bold mb-4">Tap Into a New Income Source</h2>
+                        <p class="lead text-muted mb-5">
+                            Turn your extra time into earnings by supporting verified online stores through our digital network.
+                        </p>
+                        
+                        <!-- Asset Generated Display -->
+                        <div class="asset-display bg-white rounded-4 p-4 mb-5 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <small class="text-muted text-uppercase fw-bold">ASSET GENERATED</small>
+                                    <h1 class="display-3 fw-bold text-dark mb-0">45,58k</h1>
+                                </div>
+                                <div class="trend-indicator bg-primary text-white rounded-3 px-3 py-2">
+                                    <small class="fw-bold">26,118/2000</small><br>
+                                    <small>220,342.76 +3.4%</small>
+                                </div>
+                            </div>
+                            
+                            <!-- Mini Chart Visualization -->
+                            <div class="chart-container position-relative" style="height: 80px;">
+                                <div class="chart-line position-absolute w-100 h-100">
+                                    <svg width="100%" height="100%" viewBox="0 0 400 80">
+                                        <defs>
+                                            <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.3" />
+                                                <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.1" />
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M0,60 Q50,40 100,45 T200,35 T300,25 T400,20" 
+                                              stroke="#8b5cf6" stroke-width="3" fill="none"/>
+                                        <path d="M0,60 Q50,40 100,45 T200,35 T300,25 T400,20 L400,80 L0,80 Z" 
+                                              fill="url(#chartGradient)"/>
+                                        <circle cx="320" cy="25" r="4" fill="#8b5cf6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="chart-labels d-flex justify-content-between text-muted small mt-2">
+                                <span>$100</span>
+                                <span>$300</span>
+                                <span>$500</span>
+                                <span>$800</span>
+                                <span>$1000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="features-grid">
+                        <!-- PEA Dashboard -->
+                        <div class="feature-item bg-white rounded-4 p-4 mb-4 shadow-sm">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon bg-primary bg-opacity-10 rounded-3 p-3 me-3 flex-shrink-0">
+                                    <i class="fas fa-tachometer-alt fa-2x text-primary"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-2">PEA Dashboard</h5>
+                                    <p class="text-muted mb-0">
+                                        Stay organized with a simple dashboard that tracks your check-ins, daily activity, earnings, and payout progress all in one place. It helps you stay on top of your performance and manage your work with ease.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quality Assurance -->
+                        <div class="feature-item bg-white rounded-4 p-4 mb-4 shadow-sm">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon bg-success bg-opacity-10 rounded-3 p-3 me-3 flex-shrink-0">
+                                    <i class="fas fa-shield-check fa-2x text-success"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-2">Quality Assurance</h5>
+                                    <p class="text-muted mb-0">
+                                        Every product delivered to PEA workstations is pre-verified, quality checked, and proven to sell successfully on major platforms like Amazon and eBay. We only partner with reputable store owners to ensure consistency and trust.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 14/7 Support -->
+                        <div class="feature-item bg-white rounded-4 p-4 shadow-sm">
+                            <div class="d-flex align-items-start">
+                                <div class="feature-icon bg-warning bg-opacity-10 rounded-3 p-3 me-3 flex-shrink-0">
+                                    <i class="fas fa-headset fa-2x text-warning"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-2">14/7 Support</h5>
+                                    <p class="text-muted mb-0">
+                                        Our dedicated support team is available 14 hours a day, 7 days a week to assist with questions, platform guidance, and anything you need to stay on track.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Secure Your Position Section -->
+    <section class="secure-position py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="position-content pe-lg-4">
+                        <h2 class="display-5 fw-bold mb-4">
+                            Secure Your Position Today<br>
+                            At <span class="text-warning">Keymus Ecommerce</span>
+                        </h2>
+                        
+                        <div class="membership-features mb-4">
+                            <div class="feature-item d-flex align-items-start mb-3">
+                                <div class="feature-dot bg-primary me-3 mt-2" style="width: 8px; height: 8px; border-radius: 50%;"></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Flex Membership Access Bonus</h6>
+                                    <p class="text-muted mb-0 small">Your membership starts you on a journey to unlimited earning potential. This is not a trial or limited-time offer—it's a real membership with a full commitment.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item d-flex align-items-start mb-3">
+                                <div class="feature-dot bg-success me-3 mt-2" style="width: 8px; height: 8px; border-radius: 50%;"></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Real-Time Collaboration</h6>
+                                    <p class="text-muted mb-0 small">Work alongside our team and watch your earnings grow in real-time. Our platform connects you with verified opportunities that deliver results.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-item d-flex align-items-start mb-3">
+                                <div class="feature-dot bg-warning me-3 mt-2" style="width: 8px; height: 8px; border-radius: 50%;"></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Access-Based Salary Eligibility</h6>
+                                    <p class="text-muted mb-0 small">Your earning potential is determined by your access level. Higher access means more opportunities, better projects, and increased income potential.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="position-image">
+                        <img src="assets/uploads/images/Drive/happy-woman.jpeg" alt="Secure Your Position" class="img-fluid rounded-4 shadow-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Choose Your Access Level Section -->
+    <section class="access-level py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="display-5 fw-bold mb-3">Choose Your Access Level!</h2>
+                    <p class="lead text-muted mb-5">
+                        Choose the access level that suits you and start learning more with flexible earning potential.
+                    </p>
+                    
+                    <!-- Access Level Cards -->
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="access-card bg-white rounded-4 p-4 h-100 shadow-sm border">
+                                <div class="access-icon mb-3">
+                                    <div class="icon-circle bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-seedling fa-2x text-primary"></i>
+                                    </div>
+                                </div>
+                                <h5 class="fw-bold mb-2">Starter</h5>
+                                <p class="text-muted small mb-3">Perfect for beginners looking to explore the PEA program with basic access and learning opportunities.</p>
+                                <div class="access-features">
+                                    <ul class="list-unstyled small text-muted">
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Basic dashboard access</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>5 tasks per day</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Email support</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="access-card bg-white rounded-4 p-4 h-100 shadow-sm border border-primary">
+                                <div class="access-icon mb-3">
+                                    <div class="icon-circle bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-chart-line fa-2x text-success"></i>
+                                    </div>
+                                </div>
+                                <h5 class="fw-bold mb-2">Professional</h5>
+                                <p class="text-muted small mb-3">Advanced access with higher earning potential and priority support for serious PEAs.</p>
+                                <div class="access-features">
+                                    <ul class="list-unstyled small text-muted">
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Full dashboard access</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>15 tasks per day</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Priority support</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Bonus opportunities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="access-card bg-white rounded-4 p-4 h-100 shadow-sm border">
+                                <div class="access-icon mb-3">
+                                    <div class="icon-circle bg-warning bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-crown fa-2x text-warning"></i>
+                                    </div>
+                                </div>
+                                <h5 class="fw-bold mb-2">Elite</h5>
+                                <p class="text-muted small mb-3">Maximum earning potential with unlimited access and premium features for top performers.</p>
+                                <div class="access-features">
+                                    <ul class="list-unstyled small text-muted">
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Premium dashboard</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Unlimited tasks</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>24/7 dedicated support</li>
+                                        <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Exclusive opportunities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <a href="pricing.html" class="btn btn-primary btn-lg rounded-pill px-5">
+                            View All Membership Plans <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="pea-cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-4 fw-bold mb-4">Ready to Start Your PEA Journey?</h2>
+                    <p class="lead mb-5">
+                        Join thousands of successful Product Engagement Associates and start building your affiliate marketing empire today.
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="register.html" class="btn btn-light btn-lg px-5">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Join Now
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-light btn-lg px-5">
+                            <i class="fas fa-comments me-2"></i>
+                            Get More Info
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- Footer Component -->
+    <div id="footer-placeholder"></div>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Components JS -->
+    <script src="js/components.js"></script>
+    <script>
+        // Animate statistics on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            stats.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-count'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current);
+                }, 20);
+            });
+        }
+
+        // Intersection Observer for stats animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.pea-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (navbar && window.scrollY > 100) {
+                navbar.classList.add('navbar-scrolled');
+            } else if (navbar) {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

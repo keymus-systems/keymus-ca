@@ -1,0 +1,288 @@
+<!-- Clean Dashboard Header Component -->
+<header class="header">
+    <div class="container">
+        <div class="header-left">
+            <button class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <img src="./assets/uploads/keymus/keymus-logo.jpg" alt="Keymus Ecommerce Logo" style="height: 32px;">
+        </div>
+        <div class="header-actions">
+            <button class="notification-btn" id="notificationBtn" onclick="window.location.href='./chat/'">
+                <i class="far fa-bell"></i>
+                <span class="notification-badge" id="notificationCount">0</span>
+            </button>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">
+                    <span id="userInitials"></span>
+                </div>
+                <div class="user-details">
+                    <h6 id="dashboardUsername"></h6>
+                    <p id="userBadgeNumber"></p>
+                </div>
+            </div>
+            <button class="login-btn" id="loginBtn" onclick="window.location.href='./login.html'" style="display: none;">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>Login</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<style>
+/* Header */
+.header {
+    background: var(--card-background);
+    padding: 0.1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+/* Hide standalone menu buttons when dashboard header is present */
+body > .menu-btn:not(.header .menu-btn) {
+    display: none !important;
+}
+
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: var(--background);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+}
+
+.user-details h6 {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.user-details p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.notification-btn {
+    position: relative;
+    background: var(--background);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.notification-btn:hover {
+    background: var(--border-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.login-btn {
+    background: var(--primary-blue);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    background: var(--secondary-blue);
+    transform: translateY(-1px);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--danger-red, #FF3B30);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+</style>
+
+<script>
+// Clean dashboard header - simplified sidebar integration
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Clean dashboard header loaded');
+    
+    // Initialize header after a short delay to ensure other scripts are loaded
+    setTimeout(function() {
+        initializeCleanHeader();
+    }, 200);
+});
+
+function initializeCleanHeader() {
+    const menuBtn = document.getElementById('menuBtn');
+    
+    if (!menuBtn) {
+        console.error('Menu button not found in clean dashboard header');
+        return;
+    }
+    
+    console.log('Clean header menu button found, attaching click handler');
+    
+    // Remove any existing event listeners
+    menuBtn.replaceWith(menuBtn.cloneNode(true));
+    const newMenuBtn = document.getElementById('menuBtn');
+    
+    // Add click handler using the same pattern as dashboard.html
+    newMenuBtn.addEventListener('click', function(e) {
+        console.log('Clean header menu button clicked');
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Use the same order as dashboard.html for consistency
+        if (window.SidebarManager && typeof window.SidebarManager.open === 'function') {
+            console.log('Using SidebarManager.open');
+            window.SidebarManager.open();
+        } else if (typeof window.openSidebar === 'function') {
+            console.log('Using window.openSidebar');
+            window.openSidebar();
+        } else if (typeof window.toggleSidebar === 'function') {
+            console.log('Using window.toggleSidebar');
+            window.toggleSidebar();
+        } else {
+            console.log('Using fallback manual sidebar toggle');
+            // Improved fallback
+            const sidebar = document.querySelector('.main-sidebar');
+            const overlay = document.querySelector('.bg-overlay');
+            
+            if (sidebar) {
+                sidebar.classList.add('active');
+                document.body.classList.add('sidebar-open');
+                
+                if (overlay) {
+                    overlay.classList.add('active');
+                    overlay.style.opacity = '1';
+                    overlay.style.visibility = 'visible';
+                }
+                
+                console.log('Sidebar opened manually');
+            } else {
+                console.error('Sidebar element not found');
+            }
+        }
+    });
+    
+    console.log('Clean header initialized successfully');
+}
+
+// Populate user data in header
+function populateHeaderUserData() {
+    // Check if user is authenticated
+    const authData = localStorage.getItem('auth_token');
+    if (!authData) {
+        console.log('No auth token found for header');
+        return;
+    }
+    
+    // Try to get cached user data first
+    const cachedUserData = localStorage.getItem('user_data');
+    if (cachedUserData) {
+        try {
+            const user = JSON.parse(cachedUserData);
+            updateHeaderElements(user);
+        } catch (e) {
+            console.error('Error parsing cached user data for header:', e);
+        }
+    }
+}
+
+function updateHeaderElements(user) {
+    if (!user) return;
+    
+    // Update username
+    const usernameEl = document.getElementById('dashboardUsername');
+    if (usernameEl && user.username) {
+        usernameEl.textContent = user.username;
+    }
+    
+    // Update badge number
+    const badgeEl = document.getElementById('userBadgeNumber');
+    if (badgeEl && user.badge_number) {
+        badgeEl.textContent = `#${user.badge_number}`;
+    }
+    
+    // Update initials
+    const initialsEl = document.getElementById('userInitials');
+    if (initialsEl && user.username) {
+        const initials = user.username.split(' ').map(word => word.charAt(0).toUpperCase()).join('');
+        initialsEl.textContent = initials.substring(0, 2);
+    }
+    
+    console.log('Header user data updated');
+}
+
+// Auto-populate user data when component loads
+setTimeout(function() {
+    populateHeaderUserData();
+}, 300);
+
+// Listen for user data updates
+document.addEventListener('userDataUpdated', function() {
+    populateHeaderUserData();
+});
+</script>

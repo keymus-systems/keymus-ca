@@ -1,0 +1,22 @@
+{
+  "name": "keymus-website",
+  "version": "1.0.0",
+  "description": "Static website for Keymus Ecommerce with a build process.",
+  "private": true,
+  "scripts": {
+    "start": "live-server --open=./ --ignore=dist,node_modules",
+    "build": "node build.js"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "clean-css": "^5.3.2",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.3.10",
+    "html-minifier-terser": "^7.2.0",
+    "live-server": "^1.2.0",
+    "terser": "^5.19.2"
+  },
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

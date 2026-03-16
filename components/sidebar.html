@@ -1,0 +1,396 @@
+<div class="main-sidebar">
+   <div class="sidebar-header">
+      <button id="sidebar-close-button" class="close-btn">
+         <i class="fas fa-times"></i>
+      </button>
+   </div>
+   
+   <!-- User Profile Section - More Compact -->
+   <div class="user-profile-section">
+      <div class="profile-container">
+         <div class="profile-image">
+            <img id="user-avatar" src="/assets/uploads/user.jpg" alt="User Avatar" onerror="this.src='/assets/uploads/user.jpg'">
+         </div>
+         <div class="welcome-text">
+            <h2 class="welcome-heading">Welcome, <span id="dashboard-username">Loading...</span></h2>
+            <p class="badge-info">PEA Badge No: <span id="user-badge-number">Loading...</span></p>
+            <p class="verification-status">Verified by <span id="verification-provider">Keymus</span></p>
+         </div>
+      </div>
+   </div>
+   
+   <!-- Balance Section - More Compact -->
+   <div class="balance-section">
+      <h3 class="section-label">Available Balance</h3>
+      <p class="balance-amount"><span id="user-balance">$0.00</span></p>
+      <!-- <button id="change-currency-btn" class="currency-change-btn">Change Currency</button> -->
+   </div>
+   
+   <!-- Main Navigation -->
+   <div class="navigation-menu">
+      <!-- Wallet & Profile Section -->
+      <div class="menu-section">
+         <h3 class="section-title">Wallet & Profile</h3>
+         <ul class="nav-list">
+            <li class="nav-item">
+               <a href="./profile.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-user-circle"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarProfileLink">Profile</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="./deposits.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-plus"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarDepositsLink">Cash In</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="./withdraws.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-minus"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarWithdrawalLink">Cash Out</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      
+      <!-- Engagement Section -->
+      <div class="menu-section">
+         <h3 class="section-title">Engagement</h3>
+         <ul class="nav-list">
+            <li class="nav-item">
+               <a href="./certificates.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-certificate"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarCertificatesLink">Certificate</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="./events.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-calendar-alt"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarLatestEventsLink">Latest Event</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="./memberships.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-users"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarMembershipsLink">Membership</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      
+      <!-- Support & Info Section -->
+      <div class="menu-section">
+         <h3 class="section-title">Support & Info</h3>
+         <ul class="nav-list">
+            <li class="nav-item">
+               <a href="./terms.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-file-alt"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarTermsLink">Terms & Conditions</span>
+               </a>
+            </li>
+            <li class="nav-item">
+               <a href="./faqs.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-question-circle"></i>
+                  </div>
+                  <span class="nav-text" data-i18n="sidebarFAQsLink">FAQ</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+      
+      <!-- Services Section -->
+      <div class="menu-section">
+         <h3 class="section-title">Services</h3>
+         <ul class="nav-list">
+            <li class="nav-item">
+               <a href="./credit-loan.html" class="nav-link">
+                  <div class="nav-icon-container">
+                     <i class="fas fa-credit-card"></i>
+                  </div>
+                  <span class="nav-text">Request a Credit Loan</span>
+               </a>
+            </li>
+         </ul>
+      </div>
+   </div>
+   
+   <!-- Logout Button -->
+   <div class="logout-container">
+      <button id="sidebar-logout-btn" class="logout-btn">Log Out</button>
+   </div>
+
+   <style>
+   :root {
+      --primary-blue: #007AFF;
+      --secondary-blue: #5AC8FA;
+      --success-green: #30D158;
+      --warning-orange: #FF9500;
+      --danger-red: #FF3B30;
+      --purple: #5856D6;
+      --pink: #FF2D92;
+      --background: #F2F2F7;
+      --card-background: #FFFFFF;
+      --text-primary: #000000;
+      --text-secondary: #8E8E93;
+      --border-color: #E5E5EA;
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.15);
+   }
+   
+   .main-sidebar {
+      background: var(--card-background);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow-y: auto; /* This makes the entire sidebar scrollable */
+      box-shadow: var(--shadow);
+      position: fixed;
+      top: 0;
+      left: -320px;
+      width: 320px;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 10001;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+   }
+   
+   .main-sidebar.active {
+      left: 0;
+   }
+
+   .sidebar-header {
+      padding: 0.5rem; /* Reduced padding */
+      text-align: right;
+      border-bottom: 1px solid var(--border-color);
+   }
+
+   .close-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.1rem; /* Slightly smaller */
+      cursor: pointer;
+      color: var(--text-secondary);
+   }
+
+   /* User Profile Section - More compact */
+   .user-profile-section {
+      padding: 0.8rem; /* Reduced padding */
+      border-bottom: 1px solid var(--border-color);
+   }
+
+   .profile-container {
+      display: flex;
+      align-items: center;
+   }
+
+   .profile-image {
+      margin-right: 0.8rem; /* Space between image and text */
+      flex-shrink: 0; /* Prevent the image from shrinking */
+   }
+
+   .profile-image img {
+      width: 60px; /* Smaller profile image */
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+   }
+
+   .welcome-text {
+      text-align: left; /* Left align text */
+      flex-grow: 1; /* Take up remaining space */
+   }
+
+   .welcome-heading {
+      font-size: 1.1rem; /* Smaller heading */
+      margin: 0 0 0.2rem;
+      font-weight: 600;
+   }
+
+   .badge-info, .verification-status {
+      margin: 0.1rem 0; /* Minimal margin */
+      color: var(--text-secondary);
+      font-size: 0.75rem; /* Smaller font */
+      line-height: 1.2; /* Tighter line height */
+   }
+
+   /* Balance Section - Even more compact */
+   .balance-section {
+      padding: 0.6rem; /* Further reduced padding */
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .section-label {
+      font-size: 0.8rem; /* Smaller font */
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+      color: var(--text-secondary);
+   }
+
+   .balance-amount {
+      font-size: 1.3rem; /* Smaller font */
+      font-weight: 700;
+      margin: 0.2rem 0 0.3rem; /* Further reduced margins */
+   }
+
+   .currency-change-btn {
+      background-color: var(--background);
+      border: none;
+      border-radius: 1.2rem;
+      padding: 0.25rem 1rem; /* Further reduced padding */
+      font-size: 0.75rem; /* Smaller font */
+      cursor: pointer;
+      transition: all 0.3s ease;
+   }
+
+   .currency-change-btn:hover {
+      background-color: var(--border-color);
+   }
+
+   /* Navigation Menu - Even more compact */
+   .navigation-menu {
+      padding: 0.25rem 0; /* Further reduced padding */
+      /* No flex: 1 to prevent it from expanding and causing scroll */
+   }
+
+   .menu-section {
+      padding: 0.2rem 0.75rem; /* Further reduced padding */
+      margin-bottom: 0.3rem; /* Further reduced margin */
+   }
+
+   .section-title {
+      font-size: 0.8rem; /* Even smaller font */
+      font-weight: 600;
+      margin-bottom: 0.2rem; /* Further reduced margin */
+      color: var(--text-secondary);
+      padding-left: 0.3rem; /* Add a small left padding */
+   }
+
+   .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+   }
+
+   .nav-item {
+      margin-bottom: 0.1rem; /* Minimal margin between items */
+   }
+
+   .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0.35rem 0.5rem; /* Further reduced padding */
+      text-decoration: none;
+      color: var(--text-primary);
+      border-radius: 0.4rem;
+      transition: background-color 0.2s ease;
+   }
+
+   .nav-link:hover {
+      background-color: var(--background);
+   }
+
+   .nav-icon-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.7rem; /* Even smaller icon container */
+      height: 1.7rem;
+      margin-right: 0.5rem; /* Further reduced margin */
+      border-radius: 0.3rem;
+      background-color: var(--background);
+   }
+
+   .nav-link:hover .nav-icon-container {
+      background-color: var(--border-color);
+   }
+
+   /* Logout Button - Even more compact */
+   .logout-container {
+      padding: 0.5rem; /* Further reduced padding */
+      border-top: 1px solid var(--border-color);
+      margin-top: auto; /* Push to bottom when space is available */
+   }
+
+   .logout-btn {
+      width: 100%;
+      padding: 0.4rem; /* Further reduced padding */
+      background-color: var(--danger-red);
+      color: white;
+      border: none;
+      border-radius: 0.4rem;
+      font-size: 0.85rem; /* Smaller font */
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+   }
+
+   .logout-btn:hover {
+      background-color: #E02020;
+   }
+
+   /* Scrollbar styling - Applied to the main sidebar */
+   .main-sidebar::-webkit-scrollbar {
+      width: 4px;
+   }
+
+   .main-sidebar::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.05);
+   }
+
+   .main-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 2px;
+   }
+
+   .main-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.3);
+   }
+
+   /* Overlay styling */
+   .bg-overlay {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 10000;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+   }
+
+   .bg-overlay.active {
+      opacity: 1;
+      visibility: visible;
+   }
+
+   /* Responsive adjustments */
+   @media (max-width: 768px) {
+      .main-sidebar {
+         width: 280px;
+      }
+   }
+   </style>
+
+</div>

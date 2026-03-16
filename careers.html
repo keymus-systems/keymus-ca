@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careers - Keymus Ecommerce</title>
+    <link rel="icon" type="image/png" href="assets/uploads/keymus/keymus-logo.jpg">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for public pages -->
+    <link rel="stylesheet" href="css/public-pages.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styles for careers page */
+        .navbar-brand img {
+            height: 30px;
+            margin-right: 10px;
+        }        .careers-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-split {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .hero-left {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+            display: flex;
+            align-items: center;
+            padding: 80px;
+            position: relative;
+        }
+
+        .hero-right {
+            flex: 1;
+            display: flex;
+            background: #f8f9fa;
+        }
+
+        .hero-image-section {
+            flex: 1;
+            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop&crop=face') center/cover;
+            position: relative;
+        }
+
+        .hero-creative-section {
+            flex: 1;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .creative-portrait {
+            width: 80%;
+            height: 80%;
+            background: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop&crop=face') center/cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .creative-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .careers-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            backdrop-filter: blur(10px);
+        }
+
+        .careers-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+
+        .careers-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .btn-apply-today {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-apply-today:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #8B5CF6;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 5px;
+        }
+
+        .careers-image {
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .careers-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .detail-section {
+            padding: 40px 0;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .detail-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #8B5CF6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .detail-icon {
+            font-size: 2.5rem;
+            color: #8B5CF6;
+            margin-bottom: 20px;
+        }
+
+        .detail-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .detail-text {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .job-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: #8B5CF6;
+        }
+
+        .job-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .job-meta {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .job-tag {
+            background: #8B5CF6;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        .btn-apply {
+            background: linear-gradient(45deg, #8B5CF6, #A855F7);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-apply:hover {
+            background: linear-gradient(45deg, #7C3AED, #8B5CF6);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+            color: white;
+        }        @media (max-width: 768px) {
+            .hero-split {
+                flex-direction: column;
+            }
+            
+            .hero-left {
+                padding: 40px 20px;
+                min-height: 60vh;
+            }
+            
+            .hero-right {
+                min-height: 40vh;
+            }
+            
+            .hero-image-section,
+            .hero-creative-section {
+                min-height: 300px;
+            }
+            
+            .careers-title {
+                font-size: 2.5rem;
+            }
+            
+            .careers-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .careers-details {
+                padding: 25px;
+                margin-top: -30px;
+            }
+            
+            .creative-portrait {
+                width: 90%;
+                height: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-placeholder"></div>    <!-- Careers Hero Section -->
+    <section class="careers-hero">
+        <div class="hero-split">
+            <!-- Left Content Section -->
+            <div class="hero-left">
+                <div class="hero-content">
+                    <div class="careers-tag">
+                        <i class="fas fa-users me-2"></i>Hiring Now
+                    </div>
+                    <h1 class="careers-title">Join the Team<br>Behind Keymus</h1>
+                    <p class="careers-subtitle">
+                        We're building a revolutionary team that innovates product engagement strategies and connects global talent with new opportunities in e-commerce.
+                    </p>
+                    <button class="btn btn-apply-today">
+                        Apply Today <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Visual Section -->
+            <div class="hero-right">
+                <!-- Professional Image -->
+                <div class="hero-image-section">
+                    <div style="position: absolute; top: 30px; left: 30px; background: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 20px; font-size: 0.9rem;">
+                        <i class="fas fa-headphones me-2"></i>Remote Work
+                    </div>
+                </div>
+                
+                <!-- Creative Portrait -->
+                <div class="hero-creative-section">
+                    <div class="creative-portrait">
+                        <div class="creative-overlay">
+                            <div style="text-align: center; color: #333;">
+                                <div style="font-size: 1.5rem; font-weight: bold; color: #FF6B6B;">50+</div>
+                                <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Team Members</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    <!-- Career Details Section -->
+    <section class="detail-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-4 fw-bold mb-4" style="color: #333;">Why Join Keymus?</h2>
+                    <p class="lead">
+                        We're building the future of e-commerce data and affiliate marketing. Join us in creating 
+                        innovative solutions that empower businesses and individuals worldwide.
+                    </p>
+                </div>
+            </div>
+
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="detail-title">Innovation First</h3>
+                    <p class="detail-text">
+                        Work with cutting-edge technologies and contribute to products that are shaping 
+                        the future of e-commerce and affiliate marketing.
+                    </p>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="detail-title">Global Impact</h3>
+                    <p class="detail-text">
+                        Your work will reach millions of users across 60+ countries, helping businesses 
+                        and individuals achieve their financial goals.
+                    </p>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="detail-title">Growth Opportunities</h3>
+                    <p class="detail-text">
+                        Fast-growing company with endless opportunities for career advancement, 
+                        skill development, and leadership roles.
+                    </p>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="detail-title">Work-Life Balance</h3>
+                    <p class="detail-text">
+                        Flexible working arrangements, comprehensive benefits, and a culture that 
+                        values personal well-being and professional growth.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Open Positions</h2>
+                    <p class="lead text-muted">
+                        Explore our current job openings and find the perfect role to advance your career.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <!-- Software Engineer Position -->
+                    <div class="job-card">
+                        <h4 class="job-title">Senior Full-Stack Developer</h4>
+                        <div class="job-meta">
+                            <i class="fas fa-map-marker-alt me-2"></i>Remote / San Francisco
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-clock me-2"></i>Full-time
+                        </div>
+                        <p class="mb-3">Join our engineering team to build scalable web applications and APIs that power our global PEA network platform.</p>
+                        <div class="mb-3">
+                            <span class="job-tag">React</span>
+                            <span class="job-tag">Node.js</span>
+                            <span class="job-tag">PostgreSQL</span>
+                            <span class="job-tag">AWS</span>
+                        </div>
+                        <button class="btn btn-apply">Apply Now</button>
+                    </div>
+
+                    <!-- Product Manager Position -->
+                    <div class="job-card">
+                        <h4 class="job-title">Product Manager - PEA Platform</h4>
+                        <div class="job-meta">
+                            <i class="fas fa-map-marker-alt me-2"></i>Remote / New York
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-clock me-2"></i>Full-time
+                        </div>
+                        <p class="mb-3">Lead product strategy and development for our PEA platform, working with cross-functional teams to deliver innovative features.</p>
+                        <div class="mb-3">
+                            <span class="job-tag">Product Strategy</span>
+                            <span class="job-tag">Agile</span>
+                            <span class="job-tag">Data Analysis</span>
+                            <span class="job-tag">User Research</span>
+                        </div>
+                        <button class="btn btn-apply">Apply Now</button>
+                    </div>
+
+                    <!-- Marketing Specialist Position -->
+                    <div class="job-card">
+                        <h4 class="job-title">Digital Marketing Specialist</h4>
+                        <div class="job-meta">
+                            <i class="fas fa-map-marker-alt me-2"></i>Remote / London
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-clock me-2"></i>Full-time
+                        </div>
+                        <p class="mb-3">Drive growth through digital marketing campaigns, content creation, and community building for our global PEA network.</p>
+                        <div class="mb-3">
+                            <span class="job-tag">Digital Marketing</span>
+                            <span class="job-tag">Content Creation</span>
+                            <span class="job-tag">SEO/SEM</span>
+                            <span class="job-tag">Analytics</span>
+                        </div>
+                        <button class="btn btn-apply">Apply Now</button>
+                    </div>
+
+                    <!-- Data Analyst Position -->
+                    <div class="job-card">
+                        <h4 class="job-title">Senior Data Analyst</h4>
+                        <div class="job-meta">
+                            <i class="fas fa-map-marker-alt me-2"></i>Remote / Toronto
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-clock me-2"></i>Full-time
+                        </div>
+                        <p class="mb-3">Analyze e-commerce data trends and provide insights to optimize our platform performance and user experience.</p>
+                        <div class="mb-3">
+                            <span class="job-tag">Python</span>
+                            <span class="job-tag">SQL</span>
+                            <span class="job-tag">Tableau</span>
+                            <span class="job-tag">Statistics</span>
+                        </div>
+                        <button class="btn btn-apply">Apply Now</button>
+                    </div>
+
+                    <!-- Customer Success Position -->
+                    <div class="job-card">
+                        <h4 class="job-title">Customer Success Manager</h4>
+                        <div class="job-meta">
+                            <i class="fas fa-map-marker-alt me-2"></i>Remote / Austin
+                            <span class="mx-3">|</span>
+                            <i class="fas fa-clock me-2"></i>Full-time
+                        </div>
+                        <p class="mb-3">Help our PEA community succeed by providing support, training, and building relationships with key users.</p>
+                        <div class="mb-3">
+                            <span class="job-tag">Customer Success</span>
+                            <span class="job-tag">Training</span>
+                            <span class="job-tag">Relationship Building</span>
+                            <span class="job-tag">Support</span>
+                        </div>
+                        <button class="btn btn-apply">Apply Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <p class="text-muted">Don't see a position that fits? We're always looking for talented individuals.</p>
+                    <a href="contact.html" class="btn btn-outline-primary rounded-pill px-4">
+                        Send Us Your Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Component loader script -->
+    <script src="js/components.js"></script>
+    
+    <script>
+        // Add smooth scrolling animation for stats
+        window.addEventListener('load', function() {
+            const stats = document.querySelectorAll('.stat-number');
+            
+            const animateStats = () => {
+                stats.forEach(stat => {
+                    const finalValue = stat.textContent;
+                    const numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                    let currentValue = 0;
+                    const increment = numericValue / 100;
+                    
+                    const timer = setInterval(() => {
+                        currentValue += increment;
+                        if (currentValue >= numericValue) {
+                            stat.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            if (finalValue.includes('+')) {
+                                stat.textContent = Math.floor(currentValue) + '+';
+                            } else {
+                                stat.textContent = Math.floor(currentValue);
+                            }
+                        }
+                    }, 20);
+                });
+            };
+
+            // Trigger animation when stats section is visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        observer.disconnect();
+                    }
+                });
+            });
+
+            const statsSection = document.querySelector('.careers-stats');
+            if (statsSection) {
+                observer.observe(statsSection);
+            }
+        });        // Add apply button functionality
+        document.querySelectorAll('.btn-apply').forEach((button, index) => {
+            button.addEventListener('click', function() {
+                const jobPages = [
+                    'job-fullstack-developer.html',
+                    'job-product-manager.html',
+                    'job-digital-marketing.html',
+                    'job-data-analyst.html',
+                    'job-customer-success.html'
+                ];
+                
+                if (jobPages[index]) {
+                    window.location.href = jobPages[index];
+                }
+            });
+        });
+    </script>
+</body>
+</html>

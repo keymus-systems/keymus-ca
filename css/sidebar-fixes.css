@@ -1,0 +1,88 @@
+/* Sidebar Enhancement & Bug Fixes */
+
+/* Ensure overlay is properly positioned and styled */
+.bg-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    z-index: 10000 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transition: opacity 0.3s ease, visibility 0.3s ease !important;
+    cursor: pointer;
+}
+
+.bg-overlay.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Prevent body scroll when sidebar is open */
+body.sidebar-open {
+    overflow: hidden !important;
+    padding-right: 0px; /* Prevent content shift */
+}
+
+/* Enhanced sidebar positioning */
+.main-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: -300px !important; /* Start off-screen */
+    width: 280px !important;
+    height: 100vh !important;
+    z-index: 10001 !important;
+    transition: left 0.3s ease !important;
+    overflow-y: auto !important;
+}
+
+.main-sidebar.active {
+    left: 0 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .main-sidebar {
+        width: 260px !important;
+        left: -280px !important;
+    }
+}
+
+/* Fix potential z-index conflicts */
+.header-main,
+.navbar-menu-toggler {
+    z-index: 999 !important;
+}
+
+/* Smooth scrollbar for sidebar */
+.main-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.main-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.main-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Ensure no interference with page content */
+.main-content {
+    transition: margin-left 0.3s ease;
+}
+
+/* Additional fixes for mobile */
+@media (max-width: 480px) {
+    .main-sidebar {
+        width: 240px !important;
+        left: -260px !important;
+    }
+}

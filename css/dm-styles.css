@@ -1,0 +1,929 @@
+/* Direct Message (DM) Styles */
+
+/* Main DM Container */
+.dm-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background-color: #f5f7fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* DM Conversation List */
+.dm-conversations {
+    width: 300px;
+    height: 100%;
+    background-color: #fff;
+    border-right: 1px solid #e6e9ed;
+    display: flex;
+    flex-direction: column;
+}
+
+.dm-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e6e9ed;
+}
+
+.dm-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.new-dm-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s;
+}
+
+.new-dm-btn:hover {
+    background-color: #0069d9;
+}
+
+.dm-search {
+    padding: 10px 15px;
+    position: relative;
+    border-bottom: 1px solid #e6e9ed;
+}
+
+.dm-search input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.dm-search i {
+    position: absolute;
+    right: 25px;
+    top: 18px;
+    color: #6c757d;
+}
+
+.dm-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* DM Conversation Item */
+.dm-conversation-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #e6e9ed;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.dm-conversation-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dm-conversation-item.active {
+    background-color: #e9f0fe;
+}
+
+.dm-user-avatar {
+    position: relative;
+    margin-right: 15px;
+}
+
+.dm-user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e6e9ed;
+}
+
+.user-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #28a745;
+    border: 2px solid #fff;
+}
+
+.user-status.offline {
+    background-color: #6c757d;
+}
+
+.dm-conversation-details {
+    flex: 1;
+    overflow: hidden;
+}
+
+.dm-user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.dm-username {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dm-timestamp {
+    font-size: 12px;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.dm-last-message {
+    margin: 0;
+    font-size: 14px;
+    color: #6c757d;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dm-conversation-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-left: 10px;
+}
+
+.dm-unread-badge {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.dm-unread-badge:empty {
+    display: none;
+}
+
+.dm-options {
+    position: relative;
+}
+
+.dm-options i {
+    color: #6c757d;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dm-options-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color: white;
+    border: 1px solid #e6e9ed;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+    z-index: 10;
+    min-width: 150px;
+    display: none;
+}
+
+.dm-options-menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 8px 15px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.dm-options-menu button:hover {
+    background-color: #f8f9fa;
+}
+
+.dm-options-menu button.dm-delete-btn {
+    color: #dc3545;
+}
+
+.dm-options.active .dm-options-menu {
+    display: block;
+}
+
+/* DM Chat Window */
+.dm-chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.dm-chat-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e6e9ed;
+    background-color: #fff;
+}
+
+.dm-chat-user-info {
+    display: flex;
+    align-items: center;
+}
+
+.dm-back-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 16px;
+    margin-right: 10px;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.dm-chat-username {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dm-chat-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dm-chat-actions button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #6c757d;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.dm-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #f5f7fa;
+}
+
+/* DM Message Item */
+.dm-message-item {
+    display: flex;
+    margin-bottom: 15px;
+    max-width: 70%;
+}
+
+.dm-message-item.outgoing {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.dm-message-avatar {
+    margin-right: 10px;
+}
+
+.dm-message-item.outgoing .dm-message-avatar {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+.dm-message-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dm-message-content {
+    background-color: white;
+    border-radius: 18px;
+    padding: 10px 15px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.dm-message-item.outgoing .dm-message-content {
+    background-color: #007bff;
+    color: white;
+}
+
+.dm-message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.dm-message-username {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.dm-message-item.outgoing .dm-message-username {
+    color: white;
+}
+
+.dm-message-timestamp {
+    font-size: 11px;
+    color: #6c757d;
+}
+
+.dm-message-item.outgoing .dm-message-timestamp {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dm-message-text {
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+.dm-message-attachment {
+    margin-top: 5px;
+}
+
+.dm-message-attachment img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dm-message-attachment audio {
+    width: 100%;
+}
+
+.dm-message-attachment a {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 14px;
+}
+
+.dm-message-item.outgoing .dm-message-attachment a {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.dm-message-attachment a i {
+    margin-right: 5px;
+}
+
+/* DM Chat Input */
+.dm-chat-input {
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #e6e9ed;
+}
+
+.dm-attachment-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.dm-attachment-preview:empty {
+    display: none;
+}
+
+.dm-attachment-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e6e9ed;
+}
+
+.dm-attachment-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.dm-attachment-item .dm-remove-attachment {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.dm-input-container {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.dm-attachment-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dm-message-input {
+    flex: 1;
+    border: none;
+    padding: 8px 10px;
+    background: none;
+    font-size: 14px;
+    max-height: 100px;
+    resize: none;
+}
+
+.dm-message-input:focus {
+    outline: none;
+}
+
+.dm-send-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.dm-send-btn:disabled {
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.dm-admin-controls {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+.dm-admin-controls select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* New DM Modal */
+.dm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.dm-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dm-modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.3s;
+}
+
+.dm-modal.active .dm-modal-content {
+    transform: translateY(0);
+}
+
+.dm-modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e6e9ed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dm-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dm-modal-close {
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.dm-modal-body {
+    padding: 15px;
+    overflow-y: auto;
+    max-height: calc(90vh - 70px);
+}
+
+.dm-user-search {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.dm-user-search input {
+    width: 100%;
+    padding: 8px 30px 8px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.dm-user-search i {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #6c757d;
+}
+
+.dm-user-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dm-user-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #e6e9ed;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dm-user-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dm-user-item .dm-user-avatar {
+    margin-right: 10px;
+}
+
+.dm-user-item .dm-user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dm-user-details {
+    flex: 1;
+}
+
+.dm-user-name {
+    margin: 0 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.dm-user-role {
+    margin: 0;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Voice Recorder Styles */
+.dm-voice-recorder {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.dm-record-btn, .dm-stop-btn, .dm-cancel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.dm-record-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.dm-record-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.dm-record-btn.recording {
+    background-color: #ff4136;
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+.dm-stop-btn {
+    background-color: #333;
+    color: white;
+}
+
+.dm-stop-btn:hover {
+    background-color: #555;
+}
+
+.dm-cancel-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.dm-cancel-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.dm-recording-timer {
+    font-family: monospace;
+    font-size: 14px;
+    color: #666;
+    min-width: 60px;
+}
+
+.dm-audio-preview {
+    flex: 1;
+    height: 32px;
+    border-radius: 16px;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Custom Notification Styles */
+.dm-notification-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    width: 300px;
+    max-width: 100%;
+}
+
+.dm-notification {
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 10px;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.dm-notification.visible {
+    transform: translateX(0);
+}
+
+.dm-notification-success {
+    border-left: 4px solid #28a745;
+}
+
+.dm-notification-error {
+    border-left: 4px solid #dc3545;
+}
+
+.dm-notification-info {
+    border-left: 4px solid #17a2b8;
+}
+
+.dm-notification-warning {
+    border-left: 4px solid #ffc107;
+}
+
+.dm-notification-icon {
+    margin-right: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dm-notification-success .dm-notification-icon {
+    color: #28a745;
+}
+
+.dm-notification-error .dm-notification-icon {
+    color: #dc3545;
+}
+
+.dm-notification-info .dm-notification-icon {
+    color: #17a2b8;
+}
+
+.dm-notification-warning .dm-notification-icon {
+    color: #ffc107;
+}
+
+.dm-notification-content {
+    flex: 1;
+}
+
+.dm-notification-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.dm-notification-close {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 8px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dm-notification-close:hover {
+    color: #343a40;
+}
+
+.dm-notification-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.dm-notification-progress-bar {
+    height: 100%;
+    width: 100%;
+    transform-origin: left;
+    background-color: currentColor;
+}
+
+@media (max-width: 576px) {
+    .dm-notification-container {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .dm-container {
+        flex-direction: column;
+    }
+    
+    .dm-conversations {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #e6e9ed;
+    }
+    
+    .dm-chat-window {
+        display: none;
+    }
+    
+    .dm-chat-window.active {
+        display: flex;
+    }
+    
+    .dm-back-btn {
+        display: block;
+    }
+    
+    .dm-conversations.hidden {
+        display: none;
+    }
+}
+
+/* Connection Status Indicator */
+.dm-connection-status {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.dm-connection-status i {
+    margin-right: 5px;
+}
+
+.dm-connection-status.connected {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.dm-connection-status.connecting {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.dm-connection-status.disconnected {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+@media (max-width: 576px) {
+    .dm-connection-status span {
+        display: none;
+    }
+    
+    .dm-connection-status {
+        padding: 5px;
+    }
+    
+    .dm-connection-status i {
+        margin-right: 0;
+    }
+}

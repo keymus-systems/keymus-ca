@@ -1,0 +1,822 @@
+/* 
+ * Luxury Enhancement Styles
+ * Extends existing styles without conflicts 
+ * Works with task.css, task-account-styles.css, and drive-unified-styles.css
+ */
+
+/* === LUXURY THEME VARIABLES === */
+/* Using unique --lux prefix to avoid conflicts with existing --primary, --secondary */
+:root {
+    /* Luxury Color Palette */
+    --lux-primary: #1a365d;
+    --lux-gold: #ffd700;
+    --lux-platinum: #e5e7eb;
+    --lux-glass: rgba(255, 255, 255, 0.1);
+    --lux-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --lux-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --lux-glass-bg: rgba(255, 255, 255, 0.05);
+    --lux-glass-border: rgba(255, 255, 255, 0.1);
+    --lux-text-light: rgba(255, 255, 255, 0.9);
+    --lux-text-gold: #ffd700;
+    
+    /* Luxury Animation Timing */
+    --lux-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --lux-hover-lift: translateY(-3px) scale(1.02);
+}
+
+/* === LUXURY GAUGE STYLES === */
+/* Using .lux-gauge to avoid conflict with existing .gdot-gauge */
+.lux-gauge {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: var(--lux-glass-bg);
+    border-radius: 20px;
+    border: 1px solid var(--lux-glass-border);
+    backdrop-filter: blur(15px);
+    transition: var(--lux-transition);
+}
+
+.lux-gauge:hover {
+    transform: var(--lux-hover-lift);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.lux-gauge-svg {
+    width: 120px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.lux-gauge-bg {
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 8;
+    fill: none;
+    stroke-linecap: round;
+}
+
+.lux-gauge-fill {
+    stroke: var(--lux-gold);
+    stroke-width: 8;
+    fill: none;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+    transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lux-gauge-center {
+    fill: var(--lux-primary);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.lux-gauge-needle {
+    stroke: var(--lux-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    transform-origin: 100px 100px;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lux-gauge-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--lux-text-gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.lux-gauge-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--lux-text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* === LUXURY PRODUCT RATING MODAL === */
+/* Using .lux-rating-modal to avoid conflict with existing .drive-modal */
+.lux-rating-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lux-rating-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lux-rating-modal {
+    background: var(--lux-gradient);
+    border-radius: 24px;
+    max-width: 480px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    color: white;
+    border: 2px solid var(--lux-glass-border);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9) translateY(20px);
+    transition: var(--lux-transition);
+}
+
+.lux-rating-modal-overlay.show .lux-rating-modal {
+    transform: scale(1) translateY(0);
+}
+
+.lux-rating-modal-header {
+    padding: 2rem 2rem 1rem;
+    text-align: center;
+    position: relative;
+}
+
+.lux-rating-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: var(--lux-transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lux-rating-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.lux-rating-modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--lux-text-gold);
+}
+
+.lux-rating-modal-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.lux-rating-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.lux-tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--lux-transition);
+}
+
+.lux-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.lux-tab-btn.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: var(--lux-gold);
+    color: var(--lux-text-gold);
+}
+
+.lux-rating-content {
+    padding: 0 2rem 1.5rem;
+}
+
+.lux-tab-content {
+    display: none;
+}
+
+.lux-tab-content.active {
+    display: block;
+}
+
+/* Star Rating Component */
+.lux-star-rating {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.lux-star {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: var(--lux-transition);
+}
+
+.lux-star:hover,
+.lux-star.active {
+    color: var(--lux-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transform: scale(1.1);
+}
+
+.lux-review-textarea {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 1rem;
+    color: white;
+    font-size: 1rem;
+    resize: vertical;
+    transition: var(--lux-transition);
+}
+
+.lux-review-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.lux-review-textarea:focus {
+    outline: none;
+    border-color: var(--lux-gold);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* AI Generation Section */
+.lux-ai-generate-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--lux-transition);
+    margin-bottom: 1rem;
+}
+
+.lux-ai-generate-btn:hover {
+    transform: var(--lux-hover-lift);
+    box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+}
+
+.lux-ai-preview {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 1rem;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Compensation Display */
+.lux-compensation-info {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--lux-gold);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 2rem;
+    text-align: center;
+}
+
+.lux-tier-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.lux-user-tier {
+    font-weight: 600;
+    color: var(--lux-text-gold);
+}
+
+.lux-compensation {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--lux-text-gold);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Actions */
+.lux-modal-actions {
+    padding: 1.5rem 2rem 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.lux-submit-rating-btn {
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--lux-gold) 0%, #ffed4a 100%);
+    border: none;
+    border-radius: 12px;
+    color: var(--lux-primary);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--lux-transition);
+}
+
+.lux-submit-rating-btn:hover {
+    transform: var(--lux-hover-lift);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.lux-skip-rating-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--lux-transition);
+}
+
+.lux-skip-rating-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* === LUXURY LOADING MODAL === */
+/* Using .lux-loading to avoid conflict with existing loading styles */
+.lux-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--lux-transition);
+}
+
+.lux-loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lux-loading-content {
+    background: var(--lux-gradient);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    color: white;
+    border: 2px solid var(--lux-glass-border);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+}
+
+.lux-loading-content img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+}
+
+.lux-loading-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--lux-text-gold);
+}
+
+.lux-loading-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* === ENHANCED TRENDING PRODUCTS === */
+/* Extending existing .gdot-products-carousel with luxury touches */
+.gdot-products-carousel.lux-enhanced .gdot-product-icon {
+    transition: var(--lux-transition);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--lux-glass-bg);
+    border: 1px solid var(--lux-glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.gdot-products-carousel.lux-enhanced .gdot-product-icon:hover {
+    transform: var(--lux-hover-lift);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.gdot-products-carousel.lux-enhanced .gdot-product-icon img {
+    transition: var(--lux-transition);
+}
+
+.gdot-products-carousel.lux-enhanced .gdot-product-icon:hover img {
+    transform: scale(1.05);
+}
+
+/* === LUXURY METRICS CONTAINER === */
+/* Enhancing existing .gdot-metrics-container */
+.gdot-metrics-container.lux-enhanced {
+    gap: 2rem;
+}
+
+.gdot-metrics-container.lux-enhanced .gdot-metric-card {
+    background: var(--lux-glass-bg);
+    border: 1px solid var(--lux-glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    transition: var(--lux-transition);
+}
+
+.gdot-metrics-container.lux-enhanced .gdot-metric-card:hover {
+    transform: var(--lux-hover-lift);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .lux-rating-modal {
+        margin: 1rem;
+        max-width: calc(100vw - 2rem);
+    }
+    
+    .lux-rating-modal-header {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+    
+    .lux-rating-content {
+        padding: 0 1.5rem 1rem;
+    }
+    
+    .lux-compensation-info,
+    .lux-modal-actions {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+    
+    .lux-tier-display {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .lux-gauge {
+        padding: 1rem;
+    }
+    
+    .lux-gauge-svg {
+        width: 100px;
+        height: 70px;
+    }
+}
+
+/* === DARK MODE SUPPORT === */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --lux-glass-bg: rgba(255, 255, 255, 0.08);
+        --lux-glass-border: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* === ANIMATION KEYFRAMES === */
+@keyframes luxFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes luxPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes luxGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
+    }
+}
+
+/* Apply animations */
+.lux-gauge-fill {
+    animation: luxGlow 3s ease-in-out infinite;
+}
+
+.lux-compensation {
+    animation: luxPulse 2s ease-in-out infinite;
+}
+
+/* === LUXURY SUCCESS MODAL STYLES === */
+.lux-success-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.lux-success-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lux-success-modal-content {
+    background: var(--lux-glass-bg);
+    border: 1px solid var(--lux-glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    max-width: 480px;
+    width: 90%;
+    margin: 1rem;
+    transform: translateY(50px) scale(0.9);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.lux-success-modal-overlay.show .lux-success-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.lux-success-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.lux-success-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem auto;
+    animation: luxSuccessPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes luxSuccessPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.lux-success-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.lux-success-header h3 {
+    color: var(--lux-text-light);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+}
+
+.lux-success-header p {
+    color: var(--lux-text-light);
+    opacity: 0.8;
+    margin: 0;
+}
+
+.lux-success-details {
+    margin-bottom: 2rem;
+}
+
+.lux-bonus-earned {
+    background: linear-gradient(135deg, var(--lux-gold), #ffed4e);
+    color: #1a365d;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.lux-bonus-label {
+    display: block;
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+}
+
+.lux-bonus-amount {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.lux-rating-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.lux-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lux-summary-item:last-child {
+    border-bottom: none;
+}
+
+.lux-summary-label {
+    color: var(--lux-text-light);
+    opacity: 0.8;
+    font-size: 0.875rem;
+}
+
+.lux-summary-value {
+    color: var(--lux-text-light);
+    font-weight: 600;
+}
+
+.lux-summary-value:has-text('★') {
+    color: var(--lux-gold);
+}
+
+.lux-next-steps h4 {
+    color: var(--lux-text-light);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+}
+
+.lux-next-steps ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lux-next-steps li {
+    color: var(--lux-text-light);
+    opacity: 0.9;
+    font-size: 0.875rem;
+    padding: 0.25rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.lux-next-steps li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+.lux-success-actions {
+    text-align: center;
+}
+
+.lux-continue-btn {
+    background: var(--lux-gradient);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.lux-continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .lux-success-modal-content {
+        padding: 1.5rem;
+        margin: 0.5rem;
+    }
+    
+    .lux-success-header h3 {
+        font-size: 1.25rem;
+    }
+    
+    .lux-bonus-amount {
+        font-size: 1.75rem;
+    }
+    
+    .lux-continue-btn {
+        width: 100%;
+    }
+}
+
+/* === LUXURY ENHANCED DRIVE MODAL === */
+.drive-modal-overlay.lux-enhanced,
+#driveProductModal.lux-enhanced {
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.drive-modal-overlay.lux-enhanced .drive-modal,
+#driveProductModal.lux-enhanced .drive-modal {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.drive-modal-overlay.lux-enhanced .drive-product-title,
+#driveProductModal.lux-enhanced .drive-product-title {
+    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+.drive-modal-overlay.lux-enhanced .drive-purchase-btn,
+#driveProductModal.lux-enhanced .drive-purchase-btn {
+    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    border: none;
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.drive-modal-overlay.lux-enhanced .drive-purchase-btn:hover,
+#driveProductModal.lux-enhanced .drive-purchase-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.drive-modal-overlay.lux-enhanced .drive-earnings-value,
+#driveProductModal.lux-enhanced .drive-earnings-value {
+    color: var(--lux-gold, #ffd700);
+    font-weight: 700;
+}
+
+.drive-modal-overlay.lux-enhanced .drive-commission,
+#driveProductModal.lux-enhanced .drive-commission {
+    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 1.1em;
+}
