@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Chat - Keymus</title>
+    <link rel="shortcut icon" href="assets/uploads/keymus/keymus-logo.jpg" type="image/png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chat Panel CSS -->
+    <link rel="stylesheet" href="css/chat-panel.css">
+    
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation Tabs */
+        .admin-nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .admin-nav-tabs .nav-tab {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.8);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .admin-nav-tabs .nav-tab:hover {
+            background: rgba(255,255,255,0.25);
+            color: white;
+        }
+        .admin-nav-tabs .nav-tab.active {
+            background: rgba(255,255,255,0.95);
+            color: #667eea;
+            font-weight: 600;
+            border-color: transparent;
+        }
+        .admin-nav-tabs .nav-tab .badge {
+            background: #ff5252;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+        }
+
+        /* Tab Panels */
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Registrations Table */
+        .reg-stats-row { display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .reg-stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+        .reg-stat-card .num { font-size: 1.75rem; font-weight: 700; color: #667eea; }
+        .reg-stat-card .label { font-size: 0.8rem; color: #888; }
+
+        .reg-table-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+        }
+        .reg-table-card .table { margin-bottom: 0; }
+        .reg-table-card .table th { font-size: 0.8rem; text-transform: uppercase; color: #888; border-top: none; }
+        .reg-table-card .table td { vertical-align: middle; font-size: 0.9rem; }
+        .reg-toolbar { display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center; }
+        .reg-toolbar .form-control, .reg-toolbar .form-select { max-width: 220px; border-radius: 8px; }
+
+        .badge-pending { background: #fff3e0; color: #e65100; }
+        .badge-contacted { background: #e3f2fd; color: #1565c0; }
+        .badge-approved { background: #e8f5e9; color: #2e7d32; }
+        .badge-rejected { background: #fce4ec; color: #c62828; }
+        .status-select { width: 130px; border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem; }
+        
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .conversation-list {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .conversation-item {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .conversation-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .conversation-item.active {
+            background: #e3f2fd;
+            border-left: 4px solid #667eea;
+        }
+        
+        .conversation-item:last-child {
+            border-bottom: none;
+        }
+        
+        .badge-new {
+            background: #ff5252;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+        
+        .badge-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .badge-open {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .badge-resolved {
+            background: #9e9e9e;
+            color: white;
+        }
+        
+        .chat-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+        
+        .message-bubble {
+            max-width: 70%;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.user {
+            background: #e3f2fd;
+            margin-right: auto;
+        }
+        
+        .message-bubble.admin {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        
+        .message-bubble.admin .message-time {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .chat-input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .chat-input {
+            border: 2px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 0.75rem 1.25rem;
+            resize: none;
+        }
+        
+        .chat-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .btn-send {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        
+        .btn-send:hover {
+            transform: scale(1.1);
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #9e9e9e;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .btn-action {
+            padding: 0.375rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-resolve {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .btn-resolve:hover {
+            background: #45a049;
+        }
+        
+        .btn-reopen {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .btn-reopen:hover {
+            background: #fb8c00;
+        }
+        
+        .typing-indicator {
+            display: none;
+            padding: 0.5rem;
+            color: #666;
+            font-style: italic;
+            font-size: 0.875rem;
+        }
+        
+        .connection-status {
+            padding: 0.5rem 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            display: none;
+        }
+        
+        .connection-status.connected {
+            background: #4caf50;
+            color: white;
+            display: block;
+        }
+        
+        .connection-status.disconnected {
+            background: #ff5252;
+            color: white;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus"></div>
+    
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="h3 mb-0">
+                        <i class="fas fa-cogs"></i> Keymus Admin Panel
+                    </h1>
+                    <div class="admin-nav-tabs">
+                        <div class="nav-tab active" data-tab="chat" onclick="switchTab('chat')">
+                            <i class="fas fa-comments"></i> Chat
+                        </div>
+                        <div class="nav-tab" data-tab="registrations" onclick="switchTab('registrations')">
+                            <i class="fas fa-user-plus"></i> Registrations
+                            <span class="badge" id="regBadge" style="display:none;">0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="small opacity-75" id="adminGreeting"></span>
+                    <button class="btn btn-light btn-sm" onclick="location.reload()">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                    <button class="btn btn-outline-light btn-sm" onclick="adminLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+
+        <!-- ═══════════ CHAT TAB ═══════════ -->
+        <div class="tab-panel active" id="tabChat">
+        <!-- Stats Row -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-number" id="statOpen">0</div>
+                            <div class="text-muted">Open Conversations</div>
+                        </div>
+                        <i class="fas fa-inbox fa-2x text-primary"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-number" id="statOnline">0</div>
+                            <div class="text-muted">Online Users</div>
+                        </div>
+                        <i class="fas fa-users fa-2x text-success"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-number" id="statToday">0</div>
+                            <div class="text-muted">Messages Today</div>
+                        </div>
+                        <i class="fas fa-envelope fa-2x text-info"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="stat-number" id="statResolved">0</div>
+                            <div class="text-muted">Resolved Today</div>
+                        </div>
+                        <i class="fas fa-check-circle fa-2x text-warning"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="row">
+            <!-- Conversations List -->
+            <div class="col-md-4">
+                <div class="conversation-list" id="conversationList">
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <p>Loading conversations...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Panel -->
+            <div class="col-md-8">
+                <div class="chat-panel">
+                    <div id="emptyState" class="empty-state">
+                        <i class="fas fa-comment-dots"></i>
+                        <h5>Select a conversation</h5>
+                        <p>Choose a conversation from the list to view and respond</p>
+                    </div>
+                    
+                    <div id="chatContainer" style="display: none; flex-direction: column; height: 100%;">
+                        <div class="chat-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-0" id="chatUsername">Guest User</h5>
+                                    <small id="chatSubject">Support Chat</small>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn-action btn-resolve" id="btnResolve" style="display: none;">
+                                        <i class="fas fa-check"></i> Resolve
+                                    </button>
+                                    <button class="btn-action btn-reopen" id="btnReopen" style="display: none;">
+                                        <i class="fas fa-redo"></i> Reopen
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Messages will be inserted here -->
+                        </div>
+                        
+                        <div class="typing-indicator" id="typingIndicator">
+                            User is typing...
+                        </div>
+                        
+                        <div class="chat-input-area">
+                            <div class="d-flex align-items-end gap-2">
+                                <textarea 
+                                    class="form-control chat-input" 
+                                    id="messageInput" 
+                                    rows="2" 
+                                    placeholder="Type your response..."
+                                    disabled
+                                ></textarea>
+                                <button class="btn-send" id="sendBtn" disabled>
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- end #tabChat -->
+
+        <!-- ═══════════ REGISTRATIONS TAB ═══════════ -->
+        <div class="tab-panel" id="tabRegistrations">
+            <div class="reg-stats-row" id="regStatsRow">
+                <div class="reg-stat-card"><div class="num" id="rStatTotal">—</div><div class="label">Total</div></div>
+                <div class="reg-stat-card"><div class="num" id="rStatPending">—</div><div class="label">Pending</div></div>
+                <div class="reg-stat-card"><div class="num" id="rStatContacted">—</div><div class="label">Contacted</div></div>
+                <div class="reg-stat-card"><div class="num" id="rStatApproved">—</div><div class="label">Approved</div></div>
+                <div class="reg-stat-card"><div class="num" id="rStatRejected">—</div><div class="label">Rejected</div></div>
+                <div class="reg-stat-card"><div class="num" id="rStatToday">—</div><div class="label">Today</div></div>
+            </div>
+
+            <div class="reg-table-card">
+                <div class="reg-toolbar">
+                    <input type="text" class="form-control form-control-sm" id="regSearch" placeholder="Search by name or email…" oninput="loadRegistrations()">
+                    <select class="form-select form-select-sm" id="regFilter" onchange="loadRegistrations()">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <button class="btn btn-outline-primary btn-sm" onclick="loadRegistrations()"><i class="fas fa-sync"></i> Refresh</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Location</th>
+                                <th>Status</th>
+                                <th>Registered</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="regTableBody">
+                            <tr><td colspan="7" class="text-center text-muted py-4">Loading…</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <small class="text-muted" id="regPagInfo">Showing 0 registrations</small>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary" id="regPrevBtn" onclick="regChangePage(-1)" disabled>← Prev</button>
+                        <button class="btn btn-sm btn-outline-secondary" id="regNextBtn" onclick="regChangePage(1)" disabled>Next →</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end #tabRegistrations -->
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chat Scripts - Load these first -->
+    <script src="js/chat-socket.js"></script>
+    <script src="js/admin-chat-socket.js"></script>
+    
+    <!-- Admin Chat UI Logic -->
+    <script>
+        const CHAT_API = window.KEYMUS_CHAT_URL || 'http://localhost:3001';
+        let currentConversationId = null;
+        let conversations = [];
+        let regPage = 1;
+        const regPageSize = 20;
+
+        // ── Auth Check ────────────────────────────────────────────────────────────
+        async function checkAdminAuth() {
+            const token = localStorage.getItem('admin_auth_token');
+            if (!token) {
+                window.location.href = 'admin-login.html';
+                return false;
+            }
+            try {
+                const resp = await fetch(`${CHAT_API}/api/admin/auth/me`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) {
+                    localStorage.removeItem('admin_auth_token');
+                    window.location.href = 'admin-login.html';
+                    return false;
+                }
+                const data = await resp.json();
+                document.getElementById('adminGreeting').textContent = `Hi, ${data.admin.display_name || data.admin.username}`;
+                return true;
+            } catch {
+                window.location.href = 'admin-login.html';
+                return false;
+            }
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('admin_auth_token');
+            localStorage.removeItem('auth_token');
+            window.location.href = 'admin-login.html';
+        }
+
+        // ── Tab Switching ─────────────────────────────────────────────────────────
+        function switchTab(tab) {
+            document.querySelectorAll('.nav-tab').forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
+            document.querySelectorAll('.tab-panel').forEach(el => el.classList.toggle('active', el.id === 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1)));
+            if (tab === 'registrations') {
+                loadRegistrations();
+                loadRegStats();
+            }
+        }
+        
+        // Initialize admin chat on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('Initializing Admin Chat...');
+
+            // Verify admin auth first
+            const authed = await checkAdminAuth();
+            if (!authed) return;
+            
+            // Check if AdminChatSocket is loaded
+            if (typeof AdminChatSocket === 'undefined') {
+                console.error('AdminChatSocket not loaded! Check if js/admin-chat-socket.js exists and loads correctly.');
+                alert('Failed to load admin chat module. Please check the console for errors.');
+                return;
+            }
+            
+            try {
+                // Initialize admin socket
+                const initialized = await AdminChatSocket.init();
+                
+                if (!initialized) {
+                    throw new Error('Failed to connect to admin namespace. Please ensure you have a valid admin JWT token.');
+                }
+                
+                console.log('Admin chat initialized successfully');
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Load initial data
+                loadConversations();
+                loadStats();
+                
+                // Update stats every 30 seconds
+                setInterval(loadStats, 30000);
+                
+            } catch (error) {
+                console.error('Failed to initialize admin chat:', error);
+                
+                // Show user-friendly error message
+                const errorMsg = error.message || 'Unknown error';
+                document.getElementById('connectionStatus').className = 'connection-status disconnected';
+                document.getElementById('connectionStatus').style.display = 'block';
+                document.getElementById('connectionStatus').innerHTML = `
+                    <i class="fas fa-exclamation-triangle"></i> 
+                    Chat server connection failed — <small>${errorMsg}</small>
+                `;
+            }
+        });
+        
+        function setupEventListeners() {
+            // Listen for new conversations
+            AdminChatSocket.on('newConversation', (conversation) => {
+                console.log('New conversation received:', conversation);
+                conversations.unshift(conversation);
+                renderConversations();
+                loadStats();
+                playNotificationSound();
+            });
+            
+            // Listen for new messages
+            AdminChatSocket.on('newMessage', (message) => {
+                console.log('New message received:', message);
+                
+                // Update conversation list
+                const conv = conversations.find(c => c.id === message.conversation_id);
+                if (conv) {
+                    conv.last_message = message.content;
+                    conv.updated_at = message.created_at;
+                    renderConversations();
+                }
+                
+                // If viewing this conversation, add message
+                if (currentConversationId === message.conversation_id) {
+                    appendMessage(message);
+                }
+                
+                loadStats();
+                playNotificationSound();
+            });
+            
+            // Listen for typing indicators
+            AdminChatSocket.on('userTyping', (data) => {
+                if (currentConversationId === data.conversationId) {
+                    document.getElementById('typingIndicator').style.display = 'block';
+                }
+            });
+            
+            AdminChatSocket.on('userStopTyping', (data) => {
+                if (currentConversationId === data.conversationId) {
+                    document.getElementById('typingIndicator').style.display = 'none';
+                }
+            });
+            
+            // Connection status
+            AdminChatSocket.on('connectionStatus', (status) => {
+                const statusEl = document.getElementById('connectionStatus');
+                statusEl.className = `connection-status ${status.connected ? 'connected' : 'disconnected'}`;
+                statusEl.textContent = status.connected ? '✓ Connected to chat server' : '✗ Disconnected from chat server';
+            });
+            
+            // Send message button
+            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+            
+            // Send on Ctrl+Enter
+            document.getElementById('messageInput').addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Action buttons
+            document.getElementById('btnResolve').addEventListener('click', () => resolveConversation());
+            document.getElementById('btnReopen').addEventListener('click', () => reopenConversation());
+        }
+        
+        function loadConversations() {
+            AdminChatSocket.refresh((data) => {
+                if (data.success) {
+                    conversations = data.conversations || [];
+                    console.log('Loaded conversations:', conversations.length);
+                    renderConversations();
+                } else {
+                    console.error('Failed to load conversations:', data.error);
+                }
+            });
+        }
+        
+        function renderConversations() {
+            const container = document.getElementById('conversationList');
+            
+            if (conversations.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comments"></i>
+                        <p>No conversations yet</p>
+                        <small class="text-muted">New chats will appear here</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = conversations.map(conv => {
+                const time = new Date(conv.updated_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const isActive = conv.id === currentConversationId;
+                const statusBadge = conv.status === 'open' ? 'badge-open' : 'badge-resolved';
+                
+                return `
+                    <div class="conversation-item ${isActive ? 'active' : ''}" 
+                         onclick="viewConversation('${conv.id}')">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">
+                                    ${conv.created_by_name || 'Guest User'}
+                                    <span class="badge-status ${statusBadge}">${conv.status}</span>
+                                </h6>
+                                <p class="mb-1 small text-muted">${conv.subject || 'Support Chat'}</p>
+                                <p class="mb-0 small text-truncate">${conv.last_message || 'No messages yet'}</p>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted">${time}</small>
+                                ${conv.unread_count > 0 ? `<div class="badge-new mt-1">${conv.unread_count} new</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function viewConversation(conversationId) {
+            currentConversationId = conversationId;
+            
+            AdminChatSocket.viewConversation(conversationId, (data) => {
+                if (data.success) {
+                    // Show chat container
+                    document.getElementById('emptyState').style.display = 'none';
+                    document.getElementById('chatContainer').style.display = 'flex';
+                    
+                    // Update header
+                    document.getElementById('chatUsername').textContent = data.conversation.created_by_name || 'Guest User';
+                    document.getElementById('chatSubject').textContent = data.conversation.subject || 'Support Chat';
+                    
+                    // Show/hide action buttons
+                    document.getElementById('btnResolve').style.display = data.conversation.status === 'open' ? 'block' : 'none';
+                    document.getElementById('btnReopen').style.display = data.conversation.status === 'resolved' ? 'block' : 'none';
+                    
+                    // Enable input
+                    document.getElementById('messageInput').disabled = false;
+                    document.getElementById('sendBtn').disabled = false;
+                    
+                    // Render messages
+                    const messagesContainer = document.getElementById('chatMessages');
+                    messagesContainer.innerHTML = '';
+                    
+                    data.messages.forEach(msg => appendMessage(msg));
+                    
+                    // Scroll to bottom
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    
+                    // Update active state in list
+                    renderConversations();
+                }
+            });
+        }
+        
+        function appendMessage(message) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const time = new Date(message.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const isAdmin = message.is_admin_reply;
+            
+            const messageEl = document.createElement('div');
+            messageEl.className = `message-bubble ${isAdmin ? 'admin' : 'user'}`;
+            messageEl.innerHTML = `
+                <div>${message.content}</div>
+                <div class="message-time">${message.sender_name || 'Guest'} • ${time}</div>
+            `;
+            
+            messagesContainer.appendChild(messageEl);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const content = input.value.trim();
+            
+            if (!content || !currentConversationId) return;
+            
+            AdminChatSocket.reply(currentConversationId, content, { asPersona: 'Support Team' }, (data) => {
+                if (data.success) {
+                    input.value = '';
+                    appendMessage(data.message);
+                } else {
+                    alert('Failed to send message: ' + data.error);
+                }
+            });
+        }
+        
+        function resolveConversation() {
+            if (!currentConversationId) return;
+            
+            if (confirm('Mark this conversation as resolved?')) {
+                AdminChatSocket.resolve(currentConversationId, (data) => {
+                    if (data.success) {
+                        // Update conversation in list
+                        const conv = conversations.find(c => c.id === currentConversationId);
+                        if (conv) conv.status = 'resolved';
+                        
+                        // Update UI
+                        document.getElementById('btnResolve').style.display = 'none';
+                        document.getElementById('btnReopen').style.display = 'block';
+                        renderConversations();
+                        loadStats();
+                    }
+                });
+            }
+        }
+        
+        function reopenConversation() {
+            if (!currentConversationId) return;
+            
+            AdminChatSocket.reopen(currentConversationId, (data) => {
+                if (data.success) {
+                    // Update conversation in list
+                    const conv = conversations.find(c => c.id === currentConversationId);
+                    if (conv) conv.status = 'open';
+                    
+                    // Update UI
+                    document.getElementById('btnResolve').style.display = 'block';
+                    document.getElementById('btnReopen').style.display = 'none';
+                    renderConversations();
+                    loadStats();
+                }
+            });
+        }
+        
+        function loadStats() {
+            // Get stats from AdminChatSocket
+            const stats = AdminChatSocket.getStats();
+            if (stats) {
+                document.getElementById('statOpen').textContent = stats.openConversations || 0;
+                document.getElementById('statOnline').textContent = stats.onlineUsers || 0;
+                document.getElementById('statToday').textContent = stats.messagesToday || 0;
+                document.getElementById('statResolved').textContent = stats.resolvedToday || 0;
+            }
+        }
+        
+        function playNotificationSound() {
+            // Use the built-in notification sound from AdminChatSocket
+            // (It's already implemented in admin-chat-socket.js)
+        }
+
+        // ── Registrations Tab ────────────────────────────────────────────────────
+        async function loadRegStats() {
+            try {
+                const token = localStorage.getItem('admin_auth_token');
+                const resp = await fetch(`${CHAT_API}/api/registrations/admin/stats`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (!resp.ok) return;
+                const data = await resp.json();
+                document.getElementById('rStatTotal').textContent = data.stats.total ?? 0;
+                document.getElementById('rStatPending').textContent = data.stats.pending ?? 0;
+                document.getElementById('rStatContacted').textContent = data.stats.contacted ?? 0;
+                document.getElementById('rStatApproved').textContent = data.stats.approved ?? 0;
+                document.getElementById('rStatRejected').textContent = data.stats.rejected ?? 0;
+                document.getElementById('rStatToday').textContent = data.stats.today ?? 0;
+                // Update badge
+                const pending = data.stats.pending ?? 0;
+                const badge = document.getElementById('regBadge');
+                if (pending > 0) { badge.textContent = pending; badge.style.display = 'inline'; }
+                else { badge.style.display = 'none'; }
+            } catch (e) { console.error('Failed to load reg stats:', e); }
+        }
+
+        async function loadRegistrations() {
+            const token = localStorage.getItem('admin_auth_token');
+            const search = document.getElementById('regSearch').value.trim();
+            const status = document.getElementById('regFilter').value;
+            const offset = (regPage - 1) * regPageSize;
+
+            let url = `${CHAT_API}/api/registrations/admin?offset=${offset}&limit=${regPageSize}`;
+            if (search) url += `&search=${encodeURIComponent(search)}`;
+            if (status) url += `&status=${encodeURIComponent(status)}`;
+
+            try {
+                const resp = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (!resp.ok) return;
+                const data = await resp.json();
+                renderRegTable(data.registrations, data.total);
+            } catch (e) {
+                console.error('Failed to load registrations:', e);
+                document.getElementById('regTableBody').innerHTML = '<tr><td colspan="7" class="text-center text-danger">Failed to load</td></tr>';
+            }
+        }
+
+        function renderRegTable(regs, total) {
+            const tbody = document.getElementById('regTableBody');
+            if (!regs || regs.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">No registrations found</td></tr>';
+                document.getElementById('regPagInfo').textContent = 'No registrations';
+                document.getElementById('regPrevBtn').disabled = true;
+                document.getElementById('regNextBtn').disabled = true;
+                return;
+            }
+
+            tbody.innerHTML = regs.map(r => {
+                const time = new Date(r.registered_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                const loc = [r.city, r.country].filter(Boolean).join(', ') || '—';
+                return `
+                <tr>
+                    <td><strong>${esc(r.first_name)} ${esc(r.last_name)}</strong></td>
+                    <td><a href="mailto:${esc(r.email)}">${esc(r.email)}</a></td>
+                    <td>${r.phone ? esc(r.phone) : '—'}</td>
+                    <td>${esc(loc)}</td>
+                    <td><span class="badge badge-${r.status}">${r.status}</span></td>
+                    <td><small>${time}</small></td>
+                    <td>
+                        <select class="form-select form-select-sm status-select" onchange="updateRegStatus('${r.id}', this.value)">
+                            <option value="pending" ${r.status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="contacted" ${r.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+                            <option value="approved" ${r.status === 'approved' ? 'selected' : ''}>Approved</option>
+                            <option value="rejected" ${r.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                        </select>
+                    </td>
+                </tr>`;
+            }).join('');
+
+            const from = (regPage - 1) * regPageSize + 1;
+            const to = Math.min(regPage * regPageSize, total);
+            document.getElementById('regPagInfo').textContent = `Showing ${from}–${to} of ${total}`;
+            document.getElementById('regPrevBtn').disabled = regPage <= 1;
+            document.getElementById('regNextBtn').disabled = to >= total;
+        }
+
+        function regChangePage(delta) {
+            regPage += delta;
+            if (regPage < 1) regPage = 1;
+            loadRegistrations();
+        }
+
+        async function updateRegStatus(id, status) {
+            const token = localStorage.getItem('admin_auth_token');
+            try {
+                const resp = await fetch(`${CHAT_API}/api/registrations/admin/${id}/status`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ status })
+                });
+                if (resp.ok) {
+                    loadRegStats();
+                } else {
+                    alert('Failed to update status');
+                    loadRegistrations();
+                }
+            } catch (e) {
+                alert('Failed to update status');
+                loadRegistrations();
+            }
+        }
+
+        function esc(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        // Load reg stats on initial load to show badge count
+        loadRegStats();
+    </script>
+</body>
+</html>

@@ -367,7 +367,7 @@
                             <div class="carousel-item active">
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
-                                        <img src="https://via.placeholder.com/100x100?text=Rimberio" class="rounded-circle mb-3" alt="Rimberio Logo" style="width: 80px; height: 80px;">
+                                        <img src="https://placehold.co/100x100/667eea/white?text=R" class="rounded-circle mb-3" alt="Rimberio Logo" style="width: 80px; height: 80px;">
                                         <p class="lead fst-italic">"We weren't sure what to expect before our first campaign, but the results were real. Keymus got us actual sales faster than any ad campaign ever has."</p>
                                         <h5 class="fw-bold mt-3 mb-0">Michael Johnson</h5>
                                         <p class="text-warning small">CoFounder at Framify</p>
@@ -377,7 +377,7 @@
                             <div class="carousel-item">
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
-                                        <img src="https://via.placeholder.com/100x100?text=Logo+2" class="rounded-circle mb-3" alt="Partner Logo 2" style="width: 80px; height: 80px;">
+                                        <img src="https://placehold.co/100x100/764ba2/white?text=TN" class="rounded-circle mb-3" alt="Partner Logo 2" style="width: 80px; height: 80px;">
                                         <p class="lead fst-italic">"The PEA program has been a game-changer for our new product launches. Highly recommended!"</p>
                                         <h5 class="fw-bold mt-3 mb-0">Sarah Lee</h5>
                                         <p class="text-warning small">Marketing Director at TechNova</p>
@@ -387,7 +387,7 @@
                             <div class="carousel-item">
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
-                                        <img src="https://via.placeholder.com/100x100?text=Logo+3" class="rounded-circle mb-3" alt="Partner Logo 3" style="width: 80px; height: 80px;">
+                                        <img src="https://placehold.co/100x100/4caf50/white?text=SH" class="rounded-circle mb-3" alt="Partner Logo 3" style="width: 80px; height: 80px;">
                                         <p class="lead fst-italic">"Our sales increased significantly after partnering with Keymus. Their network is powerful."</p>
                                         <h5 class="fw-bold mt-3 mb-0">David Kim</h5>
                                         <p class="text-warning small">CEO at StyleHub</p>
@@ -397,7 +397,7 @@
                             <div class="carousel-item">
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
-                                        <img src="https://via.placeholder.com/100x100?text=Logo+4" class="rounded-circle mb-3" alt="Partner Logo 4" style="width: 80px; height: 80px;">
+                                        <img src="https://placehold.co/100x100/ff9800/white?text=GL" class="rounded-circle mb-3" alt="Partner Logo 4" style="width: 80px; height: 80px;">
                                         <p class="lead fst-italic">"The onboarding process was smooth, and we saw results almost immediately. Impressive!"</p>
                                         <h5 class="fw-bold mt-3 mb-0">Jessica Chen</h5>
                                         <p class="text-warning small">Founder of GreenLeaf Organics</p>
@@ -407,7 +407,7 @@
                             <div class="carousel-item">
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
-                                        <img src="https://via.placeholder.com/100x100?text=Logo+5" class="rounded-circle mb-3" alt="Partner Logo 5" style="width: 80px; height: 80px;">
+                                        <img src="https://placehold.co/100x100/2196f3/white?text=FT" class="rounded-circle mb-3" alt="Partner Logo 5" style="width: 80px; height: 80px;">
                                         <p class="lead fst-italic">"Keymus provides an excellent platform for freelancers and businesses to connect and achieve great results."</p>
                                         <h5 class="fw-bold mt-3 mb-0">Tom Wilson</h5>
                                         <p class="text-warning small">Operations Manager at FastTrack Solutions</p>
@@ -632,7 +632,7 @@
                     <!-- Optional: Add a short paragraph here if desired -->
                 </div>
                 <div class="col-lg-6 text-center">
-                    <img src="https://via.placeholder.com/450x450?text=Man+with+Tablet+Keymus" alt="Start Your Digital Income Journey" class="img-fluid rounded shadow-sm">
+                    <img src="https://placehold.co/450x450/667eea/white?text=Keymus" alt="Start Your Digital Income Journey" class="img-fluid rounded shadow-sm">
                 </div>
             </div>
         </div>
@@ -644,6 +644,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Components JS -->
     <script src="js/components.js"></script>
+    
+    <!-- Chat Widget CSS -->
+    <link rel="stylesheet" href="css/chat-panel.css">
+    
+    <!-- Chat System Scripts -->
+    <script src="js/chat-socket.js"></script>
+    <script src="js/chat-widget.js"></script>
     <script>
         // JavaScript for full-screen mobile menu
         const navbarCollapse = document.getElementById('navbarNav');
@@ -669,7 +676,7 @@
 
         // Ensure fullscreen class is removed if window is resized to desktop view
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 991.98 && navbarCollapse.classList.contains('fullscreen')) {
+            if (navbarCollapse && window.innerWidth > 991.98 && navbarCollapse.classList.contains('fullscreen')) {
                 navbarCollapse.classList.remove('fullscreen');
                 // Ensure Bootstrap's 'show' class is also removed if it was a forced close
                 if (navbarCollapse.classList.contains('show')) {

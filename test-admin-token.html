@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Test Admin Token - Keymus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .card {
+            max-width: 700px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .token-output {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .copy-btn {
+            cursor: pointer;
+        }
+        code {
+            background: #e9ecef;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body p-4 p-md-5">
+                <h2 class="text-center mb-4">
+                    <i class="fas fa-key text-primary"></i> Generate Test Admin Token
+                </h2>
+                
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>For Testing Only!</strong> 
+                    This generates a temporary admin token for testing the admin chat panel. 
+                    In production, your main backend should generate these tokens.
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label"><strong>JWT Secret</strong></label>
+                    <input type="text" class="form-control mb-2" id="jwtSecret" 
+                           placeholder="Enter the JWT_SECRET from chat-server/.env"
+                           value="your-jwt-secret-here">
+                    <small class="text-muted">
+                        Must match <code>JWT_SECRET</code> in <code>chat-server/.env</code>
+                    </small>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label"><strong>Admin Details</strong></label>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <input type="text" class="form-control" id="adminId" 
+                                   placeholder="Admin ID" value="admin_test_001">
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <input type="text" class="form-control" id="adminName" 
+                                   placeholder="Display Name" value="Test Admin">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100 mb-3" onclick="generateToken()">
+                    <i class="fas fa-magic"></i> Generate Admin Token
+                </button>
+
+                <div id="tokenOutput" style="display: none;">
+                    <label class="form-label"><strong>Generated Token:</strong></label>
+                    <div class="token-output mb-2" id="tokenText">Token will appear here...</div>
+                    <button class="btn btn-sm btn-outline-primary w-100 mb-3" onclick="copyToken()">
+                        <i class="fas fa-copy"></i> Copy Token
+                    </button>
+
+                    <div class="alert alert-info">
+                        <strong><i class="fas fa-info-circle"></i> Next Steps:</strong>
+                        <ol class="mb-0 mt-2">
+                            <li>Copy the token above</li>
+                            <li>Open browser DevTools (F12) on <a href="admin-chat.html" target="_blank">admin-chat.html</a></li>
+                            <li>Go to Console and run: 
+                                <code>localStorage.setItem('auth_token', 'YOUR_TOKEN')</code>
+                            </li>
+                            <li>Refresh the admin chat page</li>
+                        </ol>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong><i class="fas fa-terminal"></i> Or Test via REST API:</strong>
+                        <pre class="mb-0 mt-2" style="font-size: 0.85rem;"><code>export TOKEN="<span id="tokenForCurl"></span>"
+
+# View all conversations
+curl http://localhost:3001/api/admin/chat/conversations \\
+  -H "Authorization: Bearer $TOKEN"
+
+# Get stats
+curl http://localhost:3001/api/admin/chat/stats \\
+  -H "Authorization: Bearer $TOKEN"</code></pre>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="text-center">
+                    <a href="admin-chat.html" class="btn btn-outline-secondary me-2">
+                        <i class="fas fa-arrow-left"></i> Back to Admin Chat
+                    </a>
+                    <a href="home.html" class="btn btn-outline-secondary">
+                        <i class="fas fa-home"></i> Go to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple JWT library (base64 encoding) -->
+    <script>
+        // Simple Base64URL encoding (for JWT)
+        function base64urlEncode(str) {
+            return btoa(str)
+                .replace(/\+/g, '-')
+                .replace(/\//g, '_')
+                .replace(/=/g, '');
+        }
+
+        function generateToken() {
+            const secret = document.getElementById('jwtSecret').value.trim();
+            const adminId = document.getElementById('adminId').value.trim();
+            const adminName = document.getElementById('adminName').value.trim();
+
+            if (!secret) {
+                alert('Please enter the JWT_SECRET from your .env file');
+                return;
+            }
+
+            if (!adminId || !adminName) {
+                alert('Please enter admin ID and display name');
+                return;
+            }
+
+            // JWT Header
+            const header = {
+                alg: 'HS256',
+                typ: 'JWT'
+            };
+
+            // JWT Payload
+            const payload = {
+                id: adminId,
+                displayName: adminName,
+                role: 'admin',  // Important: Must be 'admin'
+                isGuest: false,
+                iat: Math.floor(Date.now() / 1000),
+                exp: Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60) // 7 days
+            };
+
+            // Encode header and payload
+            const encodedHeader = base64urlEncode(JSON.stringify(header));
+            const encodedPayload = base64urlEncode(JSON.stringify(payload));
+
+            // NOTE: In a real app, the signature would be created server-side with the secret
+            // For testing, we'll create a mock signature
+            // WARNING: This won't work unless you implement proper HMAC-SHA256 signing
+            
+            alert('⚠️ Browser Limitation\n\nBrowsers cannot generate proper JWT signatures (requires HMAC-SHA256 with secret key).\n\nInstead, please run this command in your terminal:\n\n' +
+                'cd /home/kai/Documents/keymus/chat-server\n' +
+                'node -e "const jwt = require(\'jsonwebtoken\'); ' +
+                'const token = jwt.sign({ id: \'' + adminId + '\', displayName: \'' + adminName + '\', role: \'admin\', isGuest: false }, ' +
+                'process.env.JWT_SECRET || \'' + secret + '\', { expiresIn: \'7d\' }); ' +
+                'console.log(token);"');
+
+            // Show alternative method
+            showAlternativeMethod(secret, adminId, adminName);
+        }
+
+        function showAlternativeMethod(secret, adminId, adminName) {
+            document.getElementById('tokenOutput').style.display = 'block';
+            
+            const command = `cd /home/kai/Documents/keymus/chat-server && node -e "const jwt = require('jsonwebtoken'); const token = jwt.sign({ id: '${adminId}', displayName: '${adminName}', role: 'admin', isGuest: false }, '${secret}', { expiresIn: '7d' }); console.log(token);"`;
+            
+            document.getElementById('tokenText').innerHTML = `
+                <strong>Run this in your terminal:</strong><br><br>
+                <code style="display: block; white-space: pre-wrap;">${command}</code><br>
+                <small class="text-muted">Then copy the output token</small>
+            `;
+            
+            document.getElementById('tokenForCurl').textContent = 'PASTE_YOUR_TOKEN_HERE';
+        }
+
+        function copyToken() {
+            const tokenText = document.getElementById('tokenText').innerText;
+            navigator.clipboard.writeText(tokenText).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>
