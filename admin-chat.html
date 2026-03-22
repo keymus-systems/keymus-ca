@@ -621,6 +621,11 @@
                 
                 console.log('Admin chat initialized successfully');
                 
+                // Wait for socket connection before loading data
+                console.log('Waiting for socket connection...');
+                await AdminChatSocket.waitForConnection();
+                console.log('Socket connected, loading data...');
+                
                 // Setup event listeners
                 setupEventListeners();
                 

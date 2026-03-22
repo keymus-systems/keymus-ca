@@ -119,9 +119,14 @@ const AdminChatSocketBridge = (function () {
     }
 
     // ── View Conversation ─────────────────────────────────────────────────────
-    function viewConversation(conversationId, callback) {
+    async function viewConversation(conversationId, callback) {
         activeConversationId = conversationId;
         activeMessages = [];
+
+        // Ensure connected
+        if (!KeymusChatSocket.isConnected()) {
+            await waitForConnection();
+        }
 
         KeymusChatSocket.send('admin:view-conversation', {
             conversationId
@@ -185,12 +190,48 @@ const AdminChatSocketBridge = (function () {
 
     // ── Refresh ───────────────────────────────────────────────────────────────
     function refresh(callback) {
+        if (!KeymusChatSocket.isConnected()) {
+            console.warn('[AdminChatBridge] Not connected, waiting before refresh...');
+            waitForConnection().then(() => {
+                KeymusChatSocket.send('admin:refresh', (response) => {
+                    if (response.success) {
+                        conversations = response.conversations || [];
+                        _emit('conversationsUpdated', conversations);
+                    }
+                    if (callback) callback(response);
+                });
+            });
+            return;
+        }
+        
         KeymusChatSocket.send('admin:refresh', (response) => {
             if (response.success) {
                 conversations = response.conversations || [];
                 _emit('conversationsUpdated', conversations);
             }
             if (callback) callback(response);
+        });
+    }
+
+    // ── Wait for Connection ───────────────────────────────────────────────────
+    function waitForConnection(timeout = 5000) {
+        return new Promise((resolve) => {
+            if (KeymusChatSocket.isConnected()) {
+                resolve(true);
+                return;
+            }
+
+            const startTime = Date.now();
+            const checkInterval = setInterval(() => {
+                if (KeymusChatSocket.isConnected()) {
+                    clearInterval(checkInterval);
+                    resolve(true);
+                } else if (Date.now() - startTime >= timeout) {
+                    clearInterval(checkInterval);
+                    console.warn('[AdminChatBridge] Connection timeout');
+                    resolve(false);
+                }
+            }, 100);
         });
     }
 
@@ -239,6 +280,7 @@ const AdminChatSocketBridge = (function () {
     function getActiveConversationId() { return activeConversationId; }
     function getStats() { return stats; }
     function isInitialized() { return initialized; }
+    function isConnected() { return KeymusChatSocket.isConnected(); }
 
     // ── Disconnect ────────────────────────────────────────────────────────────
     function disconnect() {
@@ -259,6 +301,7 @@ const AdminChatSocketBridge = (function () {
         sendTyping,
         sendStopTyping,
         refresh,
+        waitForConnection,
         on,
         off,
         disconnect,
@@ -266,7 +309,8 @@ const AdminChatSocketBridge = (function () {
         getActiveMessages,
         getActiveConversationId,
         getStats,
-        isInitialized
+        isInitialized,
+        isConnected
     };
 })();
 

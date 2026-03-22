@@ -2,10 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Keymus Ecommerce - Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs in Canada | Find Work Online – Keymus Jobs</title>
+    <meta name="description" content="Browse thousands of jobs in Canada across tech, retail, finance, and more. Keymus Jobs connects newcomers and residents with flexible, remote, and full-time Canadian job opportunities. Start your job search today.">
+    <meta name="keywords" content="jobs in Canada, Canadian job board, find work in Canada, remote jobs Canada, jobs for newcomers Canada, online jobs Canada, flexible work Canada">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.keymusecommerce.com/home.html">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Jobs in Canada | Find Work Online – Keymus Jobs">
+    <meta property="og:description" content="Discover remote, part-time, and full-time jobs across Canada. Keymus Jobs is the trusted platform for newcomers and residents looking for real Canadian employment.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.keymusecommerce.com/home.html">
+    <meta property="og:image" content="assets/uploads/keymus/keymus-logo.jpg">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jobs in Canada | Find Work Online – Keymus Jobs">
+    <meta name="twitter:description" content="Browse Canadian jobs in tech, retail, e-commerce, finance, and more. Free to join. Apply today.">
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/uploads/keymus/keymus-logo.jpg" type="image/png">
     <link rel="icon" href="assets/uploads/keymus/keymus-logo.jpg" type="image/png">
+    <!-- Structured Data: JobPosting / WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Keymus Jobs",
+      "url": "https://www.keymusecommerce.com",
+      "description": "Canada's trusted job board for newcomers and residents seeking remote, flexible, and full-time work.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.keymusecommerce.com/careers.html?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS for public pages -->
@@ -110,21 +140,122 @@
             <div class="row">
             <div class="col-md-8">
                 <div class="content-box">
-                <h1>Start Your Career as a Product Engagement Associate (PEA).</h1>
-                <p class="lead">Partnered with 12K+ Brands. Train Today, Start Earning.</p>
-                <a href="login.html" class="btn btn-primary btn-lg mt-3">Keymus WorkDesk <i class="fas fa-arrow-right"></i></a>
+                <p class="text-warning fw-semibold mb-2" style="font-size:0.95rem; letter-spacing:1px; text-transform:uppercase;"><i class="fas fa-map-marker-alt me-1"></i> Canada's Online Job Platform</p>
+                <h1>Find Jobs in Canada — <span style="color:#ffc107;">Flexible, Remote &amp; Full-Time</span></h1>
+                <p class="lead">Browse thousands of Canadian job listings across tech, retail, finance, e-commerce, and more. Whether you're a newcomer settling in or a resident exploring new paths, Keymus connects you to real opportunities fast.</p>
+                <div class="d-flex flex-wrap gap-2 mt-3 mb-2">
+                    <span class="badge bg-warning text-dark px-3 py-2"><i class="fas fa-laptop-house me-1"></i> Remote Work Available</span>
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="fas fa-clock me-1"></i> Part-Time &amp; Full-Time</span>
+                    <span class="badge bg-light text-dark px-3 py-2"><i class="fas fa-globe me-1"></i> Open to Newcomers</span>
+                </div>
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <a href="careers.html" class="btn btn-warning btn-lg fw-bold">Browse Jobs <i class="fas fa-search ms-1"></i></a>
+                    <a href="register.html" class="btn btn-outline-light btn-lg">Post a Job <i class="fas fa-briefcase ms-1"></i></a>
+                </div>
+                <p class="mt-3" style="font-size:0.88rem; opacity:0.8;"><i class="fas fa-users me-1"></i> Joined by <strong>10,000+</strong> job seekers this month</p>
                 </div>
             </div>
             </div>
         </div>
     </header>
 
-    <!-- PEA Section -->
+    <!-- Job Categories Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row text-center mb-4">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="fw-bold">Explore Jobs by Category</h2>
+                    <p class="text-muted">From technology and e-commerce to healthcare and trades — find the right sector for your skills.</p>
+                </div>
+            </div>
+            <div class="row g-3 text-center">
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=tech" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-laptop-code fa-2x text-primary mb-2"></i>
+                            <h6 class="fw-bold mb-0">Tech &amp; IT</h6>
+                            <small class="text-muted">1,240+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=ecommerce" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-shopping-cart fa-2x text-warning mb-2"></i>
+                            <h6 class="fw-bold mb-0">E-Commerce</h6>
+                            <small class="text-muted">980+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=finance" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-chart-bar fa-2x text-success mb-2"></i>
+                            <h6 class="fw-bold mb-0">Finance &amp; Accounting</h6>
+                            <small class="text-muted">630+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=marketing" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-bullhorn fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold mb-0">Marketing</h6>
+                            <small class="text-muted">810+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=healthcare" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-heartbeat fa-2x text-danger mb-2"></i>
+                            <h6 class="fw-bold mb-0">Healthcare</h6>
+                            <small class="text-muted">520+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=customer-service" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-headset fa-2x text-info mb-2"></i>
+                            <h6 class="fw-bold mb-0">Customer Service</h6>
+                            <small class="text-muted">745+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=trades" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-tools fa-2x text-secondary mb-2"></i>
+                            <h6 class="fw-bold mb-0">Skilled Trades</h6>
+                            <small class="text-muted">390+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="careers.html?cat=remote" class="text-decoration-none">
+                        <div class="card h-100 border-0 shadow-sm p-3 hover-lift">
+                            <i class="fas fa-home fa-2x text-purple mb-2" style="color:#8B5CF6;"></i>
+                            <h6 class="fw-bold mb-0">Remote &amp; Freelance</h6>
+                            <small class="text-muted">2,100+ jobs</small>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="careers.html" class="btn btn-outline-primary rounded-pill px-4">View All Job Categories <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PEA / Featured Opportunity Section -->
     <section class="pea-section py-5">
         <div class="container">
             <div class="row text-center mb-5">
                 <div class="col-lg-8 mx-auto">
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Featured Opportunity</p>
                     <h2 class="display-5 fw-bold">Our Highest-Earning PEAs Make <span class="text-warning">7x</span><br> the Industry Average</h2>
+                    <p class="text-muted mt-2">The Product Engagement Associate role is one of Canada's most in-demand flexible online positions — no office required.</p>
                 </div>
             </div>
             <div class="row text-center">
@@ -158,17 +289,19 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 fw-bold">About <span class="text-warning">Keymus</span> Database</h2>
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Who We Are</p>
+                    <h2 class="display-5 fw-bold">About <span class="text-warning">Keymus</span> Jobs</h2>
+                    <p class="text-muted mt-2">A Canadian-based jobs platform built for the modern workforce — newcomers, remote workers, and ambitious professionals alike.</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <h4 class="fw-bold">Helping Products Grow Since 2005</h4>
-                    <p class="text-muted">We began Keymus in 2005, creating software to help companies manage their logistics and warehouses more efficiently. As the industry changed, so did we. By 2012, we expanded into digital marketing, and in 2018, eCommerce became our full focus.</p>
+                    <h4 class="fw-bold">Connecting Canadians to Work Since 2005</h4>
+                    <p class="text-muted">Keymus started in 2005 helping companies manage logistics and warehousing more efficiently. As the Canadian workforce evolved, so did we — expanding into digital marketing in 2012 and pivoting fully into online employment and e-commerce work in 2018.</p>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <h4 class="fw-bold">What We Do Today</h4>
-                    <p class="text-muted">Today, we partner with PEAs from around the world to help new products get noticed and sell quickly on major online platforms. Based in Canada, we support clients and PEAs across North America, Europe, and Australia. And honestly? <span class="text-warning">We’re just getting started.</span></p>
+                    <h4 class="fw-bold">Canada's Trusted Job Platform</h4>
+                    <p class="text-muted">Today, Keymus partners with thousands of Canadian employers and independent workers to match skills with real, paying roles. Headquartered in Canada, we serve job seekers across every province and support newcomers navigating the Canadian job market for the first time. <span class="text-warning fw-bold">We're just getting started.</span></p>
                 </div>
             </div>
         </div>
@@ -177,7 +310,9 @@
     <!-- Video Section -->
     <section class="video-section py-5 text-center">
         <div class="container">
-            <h2 class="display-4 fw-bold mb-4">Catch Our Latest Update!</h2>
+            <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">See How It Works</p>
+            <h2 class="display-4 fw-bold mb-2">How Keymus Jobs Works</h2>
+            <p class="text-muted mb-4">Watch how thousands of Canadians find flexible, online work through our platform every month.</p>
             <div class="ratio ratio-16x9">
                 <iframe src="https://www.youtube.com/embed/KpMGbjvBXSE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
@@ -189,13 +324,16 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <h2 class="display-5 fw-bold">Get Paid to <span class="text-warning">Power</span> New Product Launches</h2>
-                    <p class="lead text-muted mt-3 mb-4">We're building a global movement rooted in compassion and impact. We connect freelancers and brands to create meaningful work and real-world results.</p>
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Earn Online in Canada</p>
+                    <h2 class="display-5 fw-bold">Get Paid to <span class="text-warning">Power</span> Product Launches &amp; Build Your Canadian Career</h2>
+                    <p class="lead text-muted mt-3 mb-4">We connect job seekers across Canada with flexible, performance-based work that pays weekly. No commute, no degree required — just results.</p>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>Flexible Work Options</li>
-                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>Exceptional Earnings</li>
-                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>No Prior Experience Needed</li>
+                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>Flexible Work — Set Your Own Hours</li>
+                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>Competitive Weekly Pay</li>
+                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>Open to Newcomers &amp; All Experience Levels</li>
+                        <li class="mb-2"><i class="fas fa-plus text-warning me-2"></i>100% Remote — Work from Any Canadian Province</li>
                     </ul>
+                    <a href="careers.html" class="btn btn-warning btn-lg mt-2 fw-bold">Find Jobs Now <i class="fas fa-search ms-1"></i></a>
                 </div>
                 <div class="col-lg-6">
                     <img src="assets/uploads/keymus/product_launch.jpeg" class="img-fluid rounded" alt="Power New Product Launches">
@@ -224,9 +362,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold">Secure Your <span class="text-warning">Position</span><br> Today At Keymus</h2>
-                    <p class="lead text-muted mt-3 mb-4">Claim your spot in our global network of freelancers driving product revenue. Get started with straightforward training, flexible plans, and steady earning potential.</p>
-                    <a href="register.html" class="btn btn-primary btn-lg mb-4">Get Started Now <i class="fas fa-arrow-right"></i></a>
+                    <h2 class="display-5 fw-bold">Secure Your <span class="text-warning">Position</span><br> in the Canadian Job Market</h2>
+                    <p class="lead text-muted mt-3 mb-4">Claim your spot in our network of Canadian remote workers and freelancers. Start with structured onboarding, choose a plan that fits, and begin earning within days.</p>
+                    <a href="register.html" class="btn btn-primary btn-lg mb-4">Create Free Account <i class="fas fa-arrow-right"></i></a>
                     <div class="mt-4">
                         <div class="d-flex align-items-start mb-3">
                             <div class="flex-shrink-0">
@@ -257,55 +395,56 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-4 fw-bold">Helping Sellers Increase <br><span class="text-warning">Revenue by 55%+</span></h2>
-                    <p class="lead text-muted mt-3">12,000+ Product Catalog</p>
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Hiring Across Canada</p>
+                    <h2 class="display-4 fw-bold">Industries <span class="text-warning">Actively Hiring</span><br>Right Now in Canada</h2>
+                    <p class="lead text-muted mt-3">Explore the sectors with the most open positions this week — from coast to coast.</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/uploads/keymus/daily_wear.jpeg" class="card-img-top" alt="DailyWear Co.">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="assets/uploads/keymus/daily_wear.jpeg" class="card-img-top" alt="Technology Jobs in Canada" style="height:180px;object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">DailyWear Co. Boosts Online Sales by 18%</h5>
-                            <p class="card-text text-muted">DailyWear Co. partnered with Keymus and saw sales surge by 18% in just 6 weeks. Thanks to the efforts of our PEA network, DailyWear Co. has rewarded our freelancers with over $39,000 in commissions and sales are still growing.</p>
-                            <span class="badge bg-secondary">DailyWear Co.</span>
+                            <h5 class="card-title fw-bold">Technology &amp; Software</h5>
+                            <p class="card-text text-muted">Canada's tech sector is booming. From Vancouver's startup scene to Toronto's financial tech hub, demand for developers, data scientists, cloud architects, and cybersecurity professionals has never been higher.</p>
+                            <a href="careers.html?cat=tech" class="badge bg-primary text-decoration-none">1,240+ Open Roles <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/uploads/keymus/pure_aura.jpeg" class="card-img-top" alt="PureAura Cosmetics Success">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="assets/uploads/keymus/pure_aura.jpeg" class="card-img-top" alt="Healthcare Jobs in Canada" style="height:180px;object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">PureAura Teams Up with Keymus for New Product Launch</h5>
-                            <p class="card-text text-muted">PureAura Cosmetics partnered with Keymus, using our Product Engagement Associates (PEAs) to drive real purchases for their new line. PEAs create genuine sales momentum that boosts visibility and encourages others to buy, building consumer trust.</p>
-                            <span class="badge bg-secondary">PureAura Cosmetics</span>
+                            <h5 class="card-title fw-bold">Healthcare &amp; Nursing</h5>
+                            <p class="card-text text-muted">Hospitals, long-term care facilities, and community health organizations across every province are urgently hiring registered nurses, personal support workers, medical assistants, and allied health professionals.</p>
+                            <a href="careers.html?cat=healthcare" class="badge bg-danger text-decoration-none">880+ Open Roles <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/uploads/keymus/urban_nest.jpeg" class="card-img-top" alt="UrbanNest Furniture Success">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="assets/uploads/keymus/urban_nest.jpeg" class="card-img-top" alt="Skilled Trades Jobs in Canada" style="height:180px;object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">The Strategy Behind UrbanNest's Online Surge</h5>
-                            <p class="card-text text-muted">UrbanNest Furniture redefined its digital strategy by simulating early demand through targeted purchases turning visibility into real consumer interest and driving a 20% lift in online engagement over two months.</p>
-                            <span class="badge bg-secondary">UrbanNest Furniture</span>
+                            <h5 class="card-title fw-bold">Skilled Trades &amp; Construction</h5>
+                            <p class="card-text text-muted">Electricians, plumbers, welders, heavy equipment operators, and HVAC technicians are in critical demand across Alberta, Ontario, and BC. Many roles offer relocation packages and competitive hourly wages well above the national average.</p>
+                            <a href="careers.html?cat=trades" class="badge bg-warning text-dark text-decoration-none">1,500+ Open Roles <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="assets/uploads/keymus/wave_electronics.jpeg" class="card-img-top" alt="Wave Electronics Success">
+                    <div class="card h-100 shadow-sm border-0">
+                        <img src="assets/uploads/keymus/wave_electronics.jpeg" class="card-img-top" alt="Finance Jobs in Canada" style="height:180px;object-fit:cover;">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">Surfing the Future of Online Tech Shopping</h5>
-                            <p class="card-text text-muted">Wave Electronics teamed up with Keymus to boost online sales and engagement. Through targeted strategies and our PEAs, we're helping Wave build real momentum and connect with more customers every day.</p>
-                            <span class="badge bg-secondary">Wave Electronics</span>
+                            <h5 class="card-title fw-bold">Finance, Banking &amp; Accounting</h5>
+                            <p class="card-text text-muted">Canada's financial services sector — centred in Toronto but active nationally — is recruiting financial analysts, accountants, mortgage specialists, investment advisors, and compliance officers for full-time and contract roles.</p>
+                            <a href="careers.html?cat=finance" class="badge bg-success text-decoration-none">630+ Open Roles <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col text-center">
-                    <a href="login.html" class="btn btn-outline-primary btn-lg">Launch WorkDesk <i class="fas fa-arrow-right"></i></a>
+                    <a href="careers.html" class="btn btn-primary btn-lg rounded-pill px-5">Browse All Industries &amp; Jobs <i class="fas fa-arrow-right ms-1"></i></a>
                 </div>
             </div>
         </div>
@@ -316,28 +455,29 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5 mb-4 mb-lg-0">
-                    <h2 class="display-5 fw-bold">Choose Your <span class="text-warning">PEA</span><br> Membership Tier</h2>
-                    <p class="lead text-muted mt-3 mb-4">Choose the access level that fits your goals and start earning with Keymus. Each tier is built to maximize your potential as a Product Engagement Associate, offering targeted benefits to boost your growth and income.</p>
-                    <a href="memberships.html" class="btn btn-outline-primary btn-lg">Find Your Plan <i class="fas fa-arrow-right"></i></a>
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Trusted by Thousands</p>
+                    <h2 class="display-5 fw-bold">Canada's Growing <span class="text-warning">Jobs Platform</span></h2>
+                    <p class="lead text-muted mt-3 mb-4">Thousands of Canadian job seekers and employers trust Keymus Jobs every month to make meaningful employment connections — quickly and easily.</p>
+                    <a href="careers.html" class="btn btn-warning btn-lg fw-bold">Search Jobs Now <i class="fas fa-search ms-1"></i></a>
                 </div>
                 <div class="col-lg-7">
                     <div class="card shadow-lg" style="border-radius: 15px; background-color: #007bff; color: white;">
                         <div class="card-body p-4 p-md-5">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="badge bg-warning text-dark">Per Campaign</span>
-                                <span class="badge bg-dark">PEA Basic</span>
+                                <span class="badge bg-warning text-dark">Live Stats</span>
+                                <span class="badge bg-dark">Keymus Jobs</span>
                             </div>
-                            <h3 class="fw-bold mb-3">Free Plan</h3>
-                            <p style="font-size: 0.9rem;">PEA Basic is your entry point into the Keymus system. It's designed to get you trained and earning from day one.</p>
+                            <h3 class="fw-bold mb-3">By the Numbers</h3>
+                            <p style="font-size: 0.9rem;">Real data on Canada's fastest-growing employment platform, updated regularly to reflect our live job market.</p>
                             <hr style="border-top: 1px solid rgba(255,255,255,0.5);">
-                            <h5 class="fw-bold mt-4 mb-3">What You'll Get?</h5>
+                            <h5 class="fw-bold mt-4 mb-3">Platform Highlights</h5>
                             <ul class="list-unstyled" style="font-size: 0.9rem;">
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Weekly Salary: $700</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Commission: 0.7% (Single) | 2% (Bundle)</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Dashboard & Support: Standard</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Annual Potential: $36,400</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Instant Balance Refund: Within 1 Minute</li>
-                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Training: One Advisor Assigned</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Active Job Listings: 15,000+</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Verified Canadian Employers: 500+</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Provinces &amp; Territories Covered: All 13</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>New Jobs Added Daily: 200+</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Average Response Time: Under 72 Hours</li>
+                                <li class="mb-2"><i class="fas fa-check-circle text-white me-2"></i>Job Seeker Profiles: 10,000+</li>
                             </ul>
                         </div>
                     </div>
@@ -351,7 +491,8 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 fw-bold">Trusted by Over <span class="text-warning">400+</span><br> Global Retail Stores</h2>
+                    <p class="text-muted text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Real People, Real Results</p>
+                    <h2 class="display-5 fw-bold">What Canadians Are <span class="text-warning">Saying</span> About Keymus Jobs</h2>
                 </div>
             </div>
             <div class="row justify-content-center align-items-center"> <!-- Added align-items-center for vertical alignment -->
@@ -368,9 +509,9 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
                                         <img src="https://placehold.co/100x100/667eea/white?text=R" class="rounded-circle mb-3" alt="Rimberio Logo" style="width: 80px; height: 80px;">
-                                        <p class="lead fst-italic">"We weren't sure what to expect before our first campaign, but the results were real. Keymus got us actual sales faster than any ad campaign ever has."</p>
-                                        <h5 class="fw-bold mt-3 mb-0">Michael Johnson</h5>
-                                        <p class="text-warning small">CoFounder at Framify</p>
+                                        <p class="lead fst-italic">"I moved to Canada from Nigeria and had no idea where to start my job search. Within three weeks of creating my Keymus Jobs profile, I had two interviews and an offer. Genuinely life-changing."</p>
+                                        <h5 class="fw-bold mt-3 mb-0">Adaeze Nwosu</h5>
+                                        <p class="text-warning small">Marketing Coordinator — Toronto, ON</p>
                                     </div>
                                 </div>
                             </div>
@@ -378,9 +519,9 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
                                         <img src="https://placehold.co/100x100/764ba2/white?text=TN" class="rounded-circle mb-3" alt="Partner Logo 2" style="width: 80px; height: 80px;">
-                                        <p class="lead fst-italic">"The PEA program has been a game-changer for our new product launches. Highly recommended!"</p>
-                                        <h5 class="fw-bold mt-3 mb-0">Sarah Lee</h5>
-                                        <p class="text-warning small">Marketing Director at TechNova</p>
+                                        <p class="lead fst-italic">"As a newcomer navigating the Alberta job market, finding the right tools made all the difference. Keymus Jobs showed me roles I actually qualified for — not just generic listings."</p>
+                                        <h5 class="fw-bold mt-3 mb-0">Ramiro Esquivel</h5>
+                                        <p class="text-warning small">Warehouse Supervisor — Calgary, AB</p>
                                     </div>
                                 </div>
                             </div>
@@ -388,9 +529,9 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
                                         <img src="https://placehold.co/100x100/4caf50/white?text=SH" class="rounded-circle mb-3" alt="Partner Logo 3" style="width: 80px; height: 80px;">
-                                        <p class="lead fst-italic">"Our sales increased significantly after partnering with Keymus. Their network is powerful."</p>
-                                        <h5 class="fw-bold mt-3 mb-0">David Kim</h5>
-                                        <p class="text-warning small">CEO at StyleHub</p>
+                                        <p class="lead fst-italic">"I'd been out of the workforce for two years after having kids. Keymus Jobs had remote and part-time listings I could actually work around my schedule. Found a great role in under a month."</p>
+                                        <h5 class="fw-bold mt-3 mb-0">Melanie Tremblay</h5>
+                                        <p class="text-warning small">Customer Success Rep (Remote) — Montréal, QC</p>
                                     </div>
                                 </div>
                             </div>
@@ -398,9 +539,9 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
                                         <img src="https://placehold.co/100x100/ff9800/white?text=GL" class="rounded-circle mb-3" alt="Partner Logo 4" style="width: 80px; height: 80px;">
-                                        <p class="lead fst-italic">"The onboarding process was smooth, and we saw results almost immediately. Impressive!"</p>
-                                        <h5 class="fw-bold mt-3 mb-0">Jessica Chen</h5>
-                                        <p class="text-warning small">Founder of GreenLeaf Organics</p>
+                                        <p class="lead fst-italic">"We posted a skilled trades role on Keymus Jobs and had five qualified applicants within 48 hours. Far better results than the big generic boards. We'll keep coming back."</p>
+                                        <h5 class="fw-bold mt-3 mb-0">Derek Paulson</h5>
+                                        <p class="text-warning small">Operations Director — Paulson Construction, Edmonton</p>
                                     </div>
                                 </div>
                             </div>
@@ -408,9 +549,9 @@
                                 <div class="card shadow-sm">
                                     <div class="card-body text-center p-4">
                                         <img src="https://placehold.co/100x100/2196f3/white?text=FT" class="rounded-circle mb-3" alt="Partner Logo 5" style="width: 80px; height: 80px;">
-                                        <p class="lead fst-italic">"Keymus provides an excellent platform for freelancers and businesses to connect and achieve great results."</p>
-                                        <h5 class="fw-bold mt-3 mb-0">Tom Wilson</h5>
-                                        <p class="text-warning small">Operations Manager at FastTrack Solutions</p>
+                                        <p class="lead fst-italic">"The search filters on Keymus Jobs are excellent — I could narrow down by province, job type, and salary range all at once. Found an IT contract role in BC in under a week."</p>
+                                        <h5 class="fw-bold mt-3 mb-0">Priya Sundaram</h5>
+                                        <p class="text-warning small">IT Project Manager (Contract) — Vancouver, BC</p>
                                     </div>
                                 </div>
                             </div>
@@ -442,7 +583,7 @@
             <div class="row mb-5">
                 <div class="col-lg-8 mx-auto text-center">
                     <h2 class="display-5 fw-bold">Frequently Asked Questions</h2>
-                    <p class="lead text-muted mt-3">Find quick answers to common questions about getting started, earning, and upgrading your PEA access.</p>
+                    <p class="lead text-muted mt-3">Common questions from job seekers and employers using Keymus Jobs to find work or hire across Canada.</p>
                 </div>
             </div>
             <div class="row">
@@ -451,45 +592,43 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    What is Keymus Ecommerce?
+                                    Is Keymus Jobs free for job seekers?
                                 </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Keymus is a virtual workspace for freelancers that helps increase product visibility for global businesses using AI-powered systems.
+                                    Yes — creating a profile and applying to jobs on Keymus Jobs is 100% free for all job seekers. There are no hidden fees, no subscription required, and no cost to apply to any listing on the platform.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Who can join Keymus?
+                                    Can newcomers to Canada use Keymus Jobs to find work?
                                 </button>
                             </h2>
                             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Anyone aged 21 and above can apply — whether you're working full-time, part-time, or job seeking. Residents from restricted countries (e.g. Syria, North Korea, China) are not eligible.
-
+                                    Absolutely. Keymus Jobs is built with newcomers in mind. Many of our listings are open to candidates with international experience, and several employers actively seek multilingual candidates. Whether you're a permanent resident, a foreign worker, or a new citizen, you're welcome here.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    What is a PEA (Product Engagement Associate)?
+                                    What kinds of jobs are listed on Keymus Jobs?
                                 </button>
                             </h2>
                             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    A PEA is a freelance product engager who completes daily product interaction tasks inside the workspace and earns through commissions and fixed payouts.
-
+                                    We list jobs across a wide range of industries including technology, healthcare, skilled trades, finance and banking, marketing, customer service, education, logistics, hospitality, and more. Listings include full-time, part-time, contract, and remote roles across all Canadian provinces and territories.
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFour">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    How long is the workday?
+                                    How quickly can I expect to hear back from employers?
                                 </button>
                             </h2>
                             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
@@ -501,12 +640,12 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFive">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    How much can I earn?
+                                    I am an employer — how do I post a job on Keymus Jobs?
                                 </button>
                             </h2>
                             <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Earnings depend on your Access Level, task completion, and daily performance. Real-time salary info is available in the Salary Insights section of your workspace
+                                    Posting a job is straightforward. Register as an employer on Keymus Jobs, choose a posting plan that suits your hiring volume, and your listing will go live within minutes. Our team reviews all listings to ensure quality. Visit our <a href="pricing.html" class="text-primary">Post a Job</a> page to get started.
                                 </div>
                             </div>
                         </div>
@@ -515,8 +654,9 @@
                 <div class="col-lg-4 mt-4 mt-lg-0">
                     <div class="card text-center p-4" style="background-color: #ffc107; border-radius: 15px;">
                         <div class="card-body">
-                            <h4 class="card-title fw-bold text-dark">Download the full FAQ for more information</h4>
-                            <a href="assets/pdf/Keymus_FAQ.pdf" class="btn btn-primary mt-3">Download PDF <i class="fas fa-download"></i></a>
+                            <h4 class="card-title fw-bold text-dark">Ready to start your Canadian job search?</h4>
+                            <p class="text-dark small mt-2">Join over 10,000 job seekers already using Keymus Jobs.</p>
+                            <a href="register.html" class="btn btn-primary mt-3 fw-bold">Create Free Account <i class="fas fa-arrow-right ms-1"></i></a>
                         </div>
                     </div>
                 </div>
@@ -530,12 +670,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
                     <div class="store-owner-content">
-                        <p class="text-muted mb-2">Contact Centro</p>
-                        <h2 class="display-5 fw-bold text-dark mb-4">Are You a Store Owner?</h2>
+                        <p class="text-muted mb-2 text-uppercase fw-semibold" style="letter-spacing:1px; font-size:0.85rem;">Hire on Keymus Jobs</p>
+                        <h2 class="display-5 fw-bold text-dark mb-4">Are You a Canadian Employer?</h2>
                         <p class="lead text-muted mb-4">
-                            Whether you run your own ecommerce store or want to get maximum ROI from the 
-                            most successful affiliate marketing campaigns and techniques, our top-tier affiliate 
-                            marketing services will get the best conversion rate from our successful approach.
+                            Whether you're a growing startup, an established SME, or a national enterprise, Keymus Jobs connects you with qualified, work-ready candidates across every Canadian province. Post a job in minutes and start receiving applications from verified job seekers today.
                         </p>
                         
                         <!-- Reviews Section -->
@@ -573,7 +711,7 @@
                         <form class="store-owner-form">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="firstName" class="form-label text-muted">First Name</label>
+                                    <label for="firstName" class="form-label text-muted">Your First Name</label>
                                     <input type="text" class="form-control" id="firstName" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -594,18 +732,18 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="storeUrl" class="form-label text-muted">Store URL</label>
-                                    <input type="url" class="form-control" id="storeUrl" placeholder="https://yourstore.com">
+                                    <label for="storeUrl" class="form-label text-muted">Company Website</label>
+                                    <input type="url" class="form-control" id="storeUrl" placeholder="https://yourcompany.ca">
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="message" class="form-label text-muted">Tell us about your store (optional)</label>
-                                <textarea class="form-control" id="message" rows="3" placeholder="Any specific needs, product lines, or questions about Keymus"></textarea>
+                                <textarea class="form-control" id="message" rows="3" placeholder="Tell us about your hiring needs — role type, location, timeline, or any questions"></textarea>
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="agreement" required>
                                 <label class="form-check-label text-muted small" for="agreement">
-                                    I agree to receive updates, tips, and growth offers from Keymus
+                                    I agree to receive hiring tips, platform updates, and employer resources from Keymus Jobs
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-dark btn-lg w-100 fw-bold">Submit</button>
@@ -621,14 +759,15 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 mb-4 mb-lg-0">
-                    <a href="register.html" class="text-decoration-none">
-                        <h2 class="display-3 fw-bold digital-journey-link ">
-                            <span class="text-black-50">Start Your Digital Income Journey Today 
-                                <i class="fas fa-arrow-trend-up"></i>
-                            </span><br>
-                             
-                        </h2>
-                    </a>
+                    <h2 class="display-3 fw-bold">
+                        <span class="text-dark">Your Next Canadian Job<br>Starts Here.</span>
+                        <i class="fas fa-map-marker-alt text-warning ms-3"></i>
+                    </h2>
+                    <p class="lead text-muted mt-3 mb-4">Join thousands of job seekers and employers who rely on Keymus Jobs every day to find real, rewarding work across Canada.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="careers.html" class="btn btn-warning btn-lg fw-bold rounded-pill px-5">Search Jobs in Canada <i class="fas fa-search ms-2"></i></a>
+                        <a href="pricing.html" class="btn btn-outline-dark btn-lg rounded-pill px-5">Post a Job <i class="fas fa-briefcase ms-2"></i></a>
+                    </div>
                     <!-- Optional: Add a short paragraph here if desired -->
                 </div>
                 <div class="col-lg-6 text-center">
