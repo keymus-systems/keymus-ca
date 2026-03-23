@@ -1,7 +1,7 @@
 {
   "name": "keymus-website",
   "version": "1.0.0",
-  "description": "Static website for Keymus Ecommerce with a build process.",
+  "description": "Static website for Keymus Jobs — Canada's growing employment platform.",
   "private": true,
   "scripts": {
     "start": "live-server --open=./ --ignore=dist,node_modules",
