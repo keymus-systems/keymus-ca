@@ -691,7 +691,7 @@ function displayFrozenState(message, amountNeeded, tasksCompleted = '0 of 0', to
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
         ">
             <div style="
-                background: linear-gradient(145deg, #2d3748 0%, #4a5568 50%, #667eea 100%) !important;
+                background: linear-gradient(145deg, #2d3748 0%, #4a5568 50%, #0d6efd 100%) !important;
                 border-radius: 24px !important;
                 box-shadow: 
                     0 40px 120px rgba(0, 0, 0, 0.6),

@@ -393,7 +393,7 @@ class LuxuryDriveEnhancement {
             }
             
             .lux-loading-content {
-                background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+                background: var(--lux-gradient, linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%));
                 border-radius: 20px;
                 padding: 3rem 2rem;
                 text-align: center;

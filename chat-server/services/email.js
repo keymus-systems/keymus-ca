@@ -60,17 +60,17 @@ async function sendRegistrationEmail({ to, firstName, lastName }) {
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
         .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; }
+        .header { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white; padding: 30px; text-align: center; }
         .header h1 { margin: 0; font-size: 24px; }
         .body { padding: 30px; }
         .body h2 { color: #333; margin-top: 0; }
         .body p { color: #555; line-height: 1.6; font-size: 16px; }
         .steps { background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; }
-        .steps h3 { color: #667eea; margin-top: 0; }
+        .steps h3 { color: #0d6efd; margin-top: 0; }
         .steps ol { color: #555; padding-left: 20px; }
         .steps li { margin-bottom: 10px; }
         .footer { padding: 20px 30px; background: #f8f9fa; text-align: center; color: #888; font-size: 14px; }
-        .highlight { color: #667eea; font-weight: bold; }
+        .highlight { color: #0d6efd; font-weight: bold; }
     </style>
 </head>
 <body>

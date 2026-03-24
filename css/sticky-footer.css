@@ -55,7 +55,7 @@ body {
 
 .sticky-footer .footer-link:hover, 
 .sticky-footer .footer-link.active {
-    color: #667eea;
+    color: #0d6efd;
     background-color: rgba(102, 126, 234, 0.1); /* Subtle background on hover/active */
 }
 
@@ -79,17 +79,17 @@ body {
 
 /* Active state highlighting */
 .sticky-footer .footer-link.active {
-    color: #667eea;
+    color: #0d6efd;
     background-color: rgba(102, 126, 234, 0.15) !important; /* Slightly stronger background for active state */
 }
 
 .sticky-footer .footer-link.active .footer-icon {
-    color: #667eea;
+    color: #0d6efd;
     transform: translateY(-2px);
 }
 
 .sticky-footer .footer-link.active .footer-text {
-    color: #667eea;
+    color: #0d6efd;
     font-weight: 600;
 }
 

@@ -6,10 +6,8 @@ body {
 
 /* Enhanced Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%),
-                url('../assets/uploads/keymus/hero.jpeg') no-repeat center center;
+    background: url('../assets/uploads/keymus/hero.jpeg') no-repeat center center;
     background-size: cover;
-    background-blend-mode: overlay;
     color: white;
     padding: 120px 0;
     text-align: center;
@@ -33,6 +31,7 @@ body {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
+    color: white;
     display: block;
     position: relative;
     z-index: 2;

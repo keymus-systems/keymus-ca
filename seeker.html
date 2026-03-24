@@ -42,6 +42,16 @@
             z-index: 2;
         }
         
+        .hero-info-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+        
         .pea-title {
             font-size: 4.5rem;
             font-weight: 700;
@@ -437,6 +447,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-7">
+                    <div class="hero-info-card">
                     <h1>Create Your Free Canadian Job Seeker Profile</h1>
                     <p class="lead mb-4">
                         Your profile is your passport to Canada's job market. Set it up once and let verified employers across every province find you — or search 8,400+ listings and apply in seconds.
@@ -453,6 +464,7 @@
                         <span class="text-white-75 small"><i class="fas fa-check-circle me-1 text-warning"></i>100% Free to create</span>
                         <span class="text-white-75 small"><i class="fas fa-check-circle me-1 text-warning"></i>Seen by 1,200+ employers</span>
                         <span class="text-white-75 small"><i class="fas fa-check-circle me-1 text-warning"></i>No credit card needed</span>
+                    </div>
                     </div>
                 </div>
                 <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center mt-4 mt-lg-0">
@@ -523,11 +535,9 @@
     <!-- ═══ HOW TO BUILD A STRONG PROFILE ═══ -->
     <section class="pea-benefits">
         <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="display-5 fw-bold mb-3 text-white">How to Build a Profile That Gets Noticed</h2>
-                    <p class="lead text-white-75">Follow these steps to maximise your visibility with Canadian employers</p>
-                </div>
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3 text-white">How to Build a Profile That Gets Noticed</h2>
+                <p class="lead text-white-75">Follow these steps to maximise your visibility with Canadian employers</p>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
@@ -658,7 +668,7 @@
                     <h2 class="display-5 fw-bold mb-3">Your Canadian Career Starts With One Profile</h2>
                     <p class="lead mb-4 opacity-90">Join 50,000+ job seekers who've created their free Keymus Jobs profile and started receiving job matches from verified Canadian employers.</p>
                     <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a href="register.html" class="btn btn-light btn-lg rounded-pill px-5 fw-semibold" style="color:#0a58ca;">
+                        <a href="register.html" class="btn btn-light btn-lg rounded-pill px-5 fw-semibold" style="color:#0d6efd;">
                             Create Free Profile <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                         <a href="careers.html" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-semibold">

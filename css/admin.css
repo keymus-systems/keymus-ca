@@ -4,14 +4,14 @@
 
 /* Admin Global Variables */
 :root {
-    --admin-primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --admin-primary-gradient: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
     --admin-secondary-gradient: linear-gradient(45deg, #007bff, #0056b3);
     --admin-accent-gradient: linear-gradient(45deg, #ffc107, #ff8f00);
     --admin-success-gradient: linear-gradient(45deg, #28a745, #20c997);
     --admin-danger-gradient: linear-gradient(45deg, #dc3545, #e74c3c);
     --admin-warning-gradient: linear-gradient(45deg, #ffc107, #fd7e14);
     
-    --admin-primary-color: #667eea;
+    --admin-primary-color: #0d6efd;
     --admin-secondary-color: #007bff;
     --admin-accent-color: #ffc107;
     --admin-dark-bg: #2c3e50;

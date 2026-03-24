@@ -13,7 +13,7 @@
     --lux-platinum: #e5e7eb;
     --lux-glass: rgba(255, 255, 255, 0.1);
     --lux-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    --lux-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --lux-gradient: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
     --lux-glass-bg: rgba(255, 255, 255, 0.05);
     --lux-glass-border: rgba(255, 255, 255, 0.1);
     --lux-text-light: rgba(255, 255, 255, 0.9);
@@ -779,7 +779,7 @@
 
 .drive-modal-overlay.lux-enhanced .drive-product-title,
 #driveProductModal.lux-enhanced .drive-product-title {
-    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    background: var(--lux-gradient, linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -788,7 +788,7 @@
 
 .drive-modal-overlay.lux-enhanced .drive-purchase-btn,
 #driveProductModal.lux-enhanced .drive-purchase-btn {
-    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    background: var(--lux-gradient, linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%));
     border: none;
     border-radius: 16px;
     padding: 1rem 2rem;
@@ -813,7 +813,7 @@
 
 .drive-modal-overlay.lux-enhanced .drive-commission,
 #driveProductModal.lux-enhanced .drive-commission {
-    background: var(--lux-gradient, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    background: var(--lux-gradient, linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

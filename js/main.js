@@ -428,7 +428,7 @@ function showSigningOutDialog() {
             height: 60px;
             margin: 0 auto 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
             display: flex;
             align-items: center;
             justify-content: center;

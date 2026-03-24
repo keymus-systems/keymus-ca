@@ -207,7 +207,7 @@ class AdminChatMessages {
     // Message styling based on sender type
     const messageClass = isFromPersona ? 'message-persona' : 'message-user';
     const senderIcon = isFromPersona ? 'fa-robot' : 'fa-user';
-    const senderColor = isFromPersona ? '#6f42c1' : '#007bff';
+    const senderColor = isFromPersona ? '#0a58ca' : '#007bff';
     
     // Admin attribution for persona messages
     const adminAttribution = isFromAdmin && message.admin_username 
