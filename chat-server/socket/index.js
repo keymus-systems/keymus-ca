@@ -10,7 +10,14 @@ const setupAdminNamespace = require('./admin-namespace');
 function setupSocketIO(server, allowedOrigins) {
     const io = new Server(server, {
         cors: {
-            origin: allowedOrigins,
+            // Also allow origin "null" sent by browsers loading via file://
+            origin: (origin, callback) => {
+                if (!origin || origin === 'null' || allowedOrigins.includes(origin)) {
+                    callback(null, true);
+                } else {
+                    callback(new Error(`CORS blocked origin: ${origin}`));
+                }
+            },
             credentials: true
         },
         pingTimeout: 60000,

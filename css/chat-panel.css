@@ -416,9 +416,9 @@
 @media (max-width: 480px) {
     .keymus-chat-panel {
         width: calc(100vw - 16px);
-        height: calc(100vh - 80px);
+        height: calc(100vh - 100px);
         max-height: none;
-        bottom: 8px;
+        bottom: 70px;
         right: 8px;
         border-radius: 12px;
     }
@@ -432,6 +432,23 @@
         width: 52px;
         height: 52px;
         font-size: 20px;
+    }
+
+    .keymus-chat-input-area {
+        padding: 12px 12px;
+        gap: 6px;
+    }
+
+    .keymus-chat-input {
+        min-height: 36px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .keymus-chat-send-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
     }
 }
 

@@ -21,7 +21,8 @@ const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:8080,ht
 app.use(cors({
     origin: (origin, callback) => {
         // Allow requests with no origin (e.g. mobile apps, curl)
-        if (!origin || allowedOrigins.includes(origin)) {
+        // Also allow origin "null" sent by browsers when loading via file://
+        if (!origin || origin === 'null' || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             console.warn(`CORS blocked origin: ${origin}`);
