@@ -170,6 +170,22 @@ function setupChatNamespace(nsp) {
                     conversationId
                 });
 
+                // Push fresh stats to all connected admins
+                try {
+                    const stats = await db.getOne(`
+                        SELECT
+                            (SELECT COUNT(*) FROM conversations WHERE status = 'open') AS open_conversations,
+                            (SELECT COUNT(*) FROM conversations WHERE status = 'resolved') AS resolved_conversations,
+                            (SELECT COUNT(*) FROM conversations
+                             WHERE status = 'resolved'
+                             AND COALESCE(resolved_at, updated_at) > NOW() - INTERVAL '24 hours') AS resolved_today,
+                            (SELECT COUNT(*) FROM messages WHERE created_at > NOW() - INTERVAL '24 hours') AS messages_today,
+                            (SELECT COUNT(*) FROM messages) AS total_messages,
+                            (SELECT COUNT(*) FROM chat_users WHERE is_online = TRUE AND is_admin = FALSE) AS online_users
+                    `);
+                    nsp.server.of('/admin').emit('admin:stats', { stats });
+                } catch (_) {}
+
                 callback?.({ success: true, message });
             } catch (err) {
                 console.error('[/chat] send error:', err.message);

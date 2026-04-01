@@ -9,6 +9,26 @@ const { createSocketThrottle } = require('../middleware/rate-limit');
 function setupAdminNamespace(nsp, chatNsp) {
     const messageThrottle = createSocketThrottle(60); // 60 messages per minute for admins
 
+    // ── Broadcast fresh stats to all connected admins ────────────────────────
+    async function broadcastStats() {
+        try {
+            const stats = await db.getOne(`
+                SELECT
+                    (SELECT COUNT(*) FROM conversations WHERE status = 'open') AS open_conversations,
+                    (SELECT COUNT(*) FROM conversations WHERE status = 'resolved') AS resolved_conversations,
+                    (SELECT COUNT(*) FROM conversations
+                     WHERE status = 'resolved'
+                     AND COALESCE(resolved_at, updated_at) > NOW() - INTERVAL '24 hours') AS resolved_today,
+                    (SELECT COUNT(*) FROM messages WHERE created_at > NOW() - INTERVAL '24 hours') AS messages_today,
+                    (SELECT COUNT(*) FROM messages) AS total_messages,
+                    (SELECT COUNT(*) FROM chat_users WHERE is_online = TRUE AND is_admin = FALSE) AS online_users
+            `);
+            nsp.emit('admin:stats', { stats });
+        } catch (err) {
+            console.error('[/admin] broadcastStats error:', err.message);
+        }
+    }
+
     nsp.on('connection', async (socket) => {
         const admin = socket.user;
         console.log(`[/admin] Connected: ${admin.id}`);
@@ -47,7 +67,11 @@ function setupAdminNamespace(nsp, chatNsp) {
                 SELECT
                     (SELECT COUNT(*) FROM conversations WHERE status = 'open') AS open_conversations,
                     (SELECT COUNT(*) FROM conversations WHERE status = 'resolved') AS resolved_conversations,
+                    (SELECT COUNT(*) FROM conversations
+                     WHERE status = 'resolved'
+                     AND COALESCE(resolved_at, updated_at) > NOW() - INTERVAL '24 hours') AS resolved_today,
                     (SELECT COUNT(*) FROM messages WHERE created_at > NOW() - INTERVAL '24 hours') AS messages_today,
+                    (SELECT COUNT(*) FROM messages) AS total_messages,
                     (SELECT COUNT(*) FROM chat_users WHERE is_online = TRUE AND is_admin = FALSE) AS online_users
             `);
             socket.emit('admin:stats', { stats });
@@ -104,6 +128,9 @@ function setupAdminNamespace(nsp, chatNsp) {
 
                 // Notify other admins
                 socket.broadcast.emit('admin:new-message', { message, conversationId });
+
+                // Refresh stats for all admins
+                broadcastStats();
 
                 callback?.({ success: true, message });
             } catch (err) {
@@ -170,6 +197,12 @@ function setupAdminNamespace(nsp, chatNsp) {
 
                 await db.query(`UPDATE conversations SET status = 'resolved' WHERE id = $1`, [conversationId]);
 
+                // Set resolved_at if the column exists (migration 003)
+                await db.query(
+                    `UPDATE conversations SET resolved_at = NOW() WHERE id = $1`,
+                    [conversationId]
+                ).catch(() => {}); // Silently ignore if column doesn't exist yet
+
                 // System message
                 await db.query(`
                     INSERT INTO messages (conversation_id, sender_id, content, content_type)
@@ -181,6 +214,9 @@ function setupAdminNamespace(nsp, chatNsp) {
 
                 // Notify all admins
                 nsp.emit('admin:conversation-resolved', { conversationId });
+
+                // Refresh stats for all admins
+                broadcastStats();
 
                 callback?.({ success: true });
             } catch (err) {
@@ -197,6 +233,9 @@ function setupAdminNamespace(nsp, chatNsp) {
                 await db.query(`UPDATE conversations SET status = 'open' WHERE id = $1`, [conversationId]);
 
                 nsp.emit('admin:conversation-reopened', { conversationId });
+
+                // Refresh stats for all admins
+                broadcastStats();
 
                 callback?.({ success: true });
             } catch (err) {

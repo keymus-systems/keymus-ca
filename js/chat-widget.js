@@ -281,6 +281,27 @@
         msgContainer.appendChild(div);
     }
 
+    // ── Notification Sound ─────────────────────────────────────────────────────
+    function playNotificationSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            // Two ascending tones: a pleasant "ding-ding" notification
+            [[587.33, 0], [880.00, 0.14]].forEach(([freq, delay]) => {
+                const osc  = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.001, ctx.currentTime + delay);
+                gain.gain.linearRampToValueAtTime(0.14, ctx.currentTime + delay + 0.015);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.22);
+                osc.start(ctx.currentTime + delay);
+                osc.stop(ctx.currentTime + delay + 0.25);
+            });
+        } catch (e) { /* audio context not available */ }
+    }
+
     // ── Send Message ──────────────────────────────────────────────────────────
     function sendMessage() {
         const content = inputField.value.trim();
@@ -349,6 +370,9 @@
         messages.push(msg);
         appendMessageElement(msg);
         scrollToBottom();
+
+        // Always play sound for incoming admin messages
+        playNotificationSound();
 
         // If panel is open, mark as read
         if (isOpen) {
@@ -463,8 +487,10 @@
         if (count > 0) {
             badge.textContent = count > 99 ? '99+' : count;
             badge.classList.add('visible');
+            if (widget) widget.classList.add('has-unread');
         } else {
             badge.classList.remove('visible');
+            if (widget) widget.classList.remove('has-unread');
         }
     }
 

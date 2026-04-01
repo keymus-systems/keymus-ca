@@ -186,6 +186,12 @@ router.patch('/conversations/:id/resolve', async (req, res) => {
             return res.status(404).json({ error: 'Conversation not found' });
         }
 
+        // Set resolved_at if the column exists (migration 003)
+        await db.query(
+            `UPDATE conversations SET resolved_at = NOW() WHERE id = $1`,
+            [conversationId]
+        ).catch(() => {});
+
         // Add system message
         await ensureAdminUser(req.user);
         await db.query(`
@@ -238,6 +244,9 @@ router.get('/stats', async (req, res) => {
             SELECT
                 (SELECT COUNT(*) FROM conversations WHERE status = 'open') AS open_conversations,
                 (SELECT COUNT(*) FROM conversations WHERE status = 'resolved') AS resolved_conversations,
+                (SELECT COUNT(*) FROM conversations
+                 WHERE status = 'resolved'
+                 AND COALESCE(resolved_at, updated_at) > NOW() - INTERVAL '24 hours') AS resolved_today,
                 (SELECT COUNT(*) FROM conversations) AS total_conversations,
                 (SELECT COUNT(*) FROM messages WHERE created_at > NOW() - INTERVAL '24 hours') AS messages_today,
                 (SELECT COUNT(*) FROM messages) AS total_messages,

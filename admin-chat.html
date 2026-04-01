@@ -168,6 +168,56 @@
             background: #9e9e9e;
             color: white;
         }
+
+        /* Unread conversation row styling */
+        .conversation-item.has-unread {
+            background: #f0f7ff;
+            border-left: 3px solid #667eea;
+        }
+        .conversation-item.has-unread h6 {
+            font-weight: 700;
+        }
+        .unread-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ff3b30;
+            color: white;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            animation: unreadPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+        @keyframes unreadPop {
+            0%   { transform: scale(0); }
+            80%  { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        /* Pulsing glow on "Open Conversations" stat card when there are unread messages */
+        .stats-card.has-unread-messages {
+            border: 2px solid #ff3b30;
+            animation: statCardPulse 2s ease-in-out infinite;
+        }
+        @keyframes statCardPulse {
+            0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+            50%       { box-shadow: 0 0 0 6px rgba(255, 59, 48, 0.15), 0 2px 8px rgba(0,0,0,0.08); }
+        }
+        .stat-unread-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #ff3b30;
+            color: white;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 1px 7px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
         
         .chat-panel {
             background: white;
@@ -379,7 +429,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <div class="stat-number" id="statOpen">0</div>
-                            <div class="text-muted">Open Conversations</div>
+                            <div class="text-muted">Open Conversations <span id="statOpenUnread" class="stat-unread-label" style="display:none"></span></div>
                         </div>
                         <i class="fas fa-inbox fa-2x text-primary"></i>
                     </div>
@@ -553,6 +603,8 @@
         const CHAT_API = window.KEYMUS_CHAT_URL || 'http://localhost:3001';
         let currentConversationId = null;
         let conversations = [];
+        // In-memory unread count per conversation (key = conversationId, value = int)
+        const adminUnreadCounts = new Map();
         let regPage = 1;
         const regPageSize = 20;
 
@@ -658,7 +710,10 @@
                 // Extract conversation object if wrapped in {conversation, user}
                 const conv = conversation.conversation || conversation;
                 conversations.unshift(conv);
+                // A brand-new conversation always has at least 1 unread message
+                adminUnreadCounts.set(conv.id, (adminUnreadCounts.get(conv.id) || 0) + 1);
                 renderConversations();
+                updateUnreadBadges();
                 loadStats();
                 playNotificationSound();
             });
@@ -676,13 +731,23 @@
             AdminChatSocket.on('newMessage', (message) => {
                 console.log('New message received:', message);
                 
-                // Update conversation list
+                // Update conversation list preview
                 const conv = conversations.find(c => c.id === message.conversation_id);
                 if (conv) {
                     conv.last_message = message.content;
                     conv.updated_at = message.created_at;
-                    renderConversations();
                 }
+
+                // Track unread for messages not currently in view and not from admin
+                if (!message.is_admin_reply && currentConversationId !== message.conversation_id) {
+                    adminUnreadCounts.set(
+                        message.conversation_id,
+                        (adminUnreadCounts.get(message.conversation_id) || 0) + 1
+                    );
+                    updateUnreadBadges();
+                }
+
+                renderConversations();
                 
                 // If viewing this conversation, add message
                 if (currentConversationId === message.conversation_id) {
@@ -706,6 +771,11 @@
                 }
             });
             
+            // Live stats pushed from server (on connect + after every message/resolve)
+            AdminChatSocket.on('statsUpdated', (stats) => {
+                applyStats(stats);
+            });
+
             // Connection status
             AdminChatSocket.on('connectionStatus', (status) => {
                 const statusEl = document.getElementById('connectionStatus');
@@ -762,9 +832,10 @@
                 const time = new Date(conv.last_message_at || conv.updated_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 const isActive = conv.id === currentConversationId;
                 const statusBadge = conv.status === 'open' ? 'badge-open' : 'badge-resolved';
+                const unread = adminUnreadCounts.get(conv.id) || 0;
                 
                 return `
-                    <div class="conversation-item ${isActive ? 'active' : ''}" 
+                    <div class="conversation-item ${isActive ? 'active' : ''} ${unread > 0 ? 'has-unread' : ''}" 
                          onclick="viewConversation('${conv.id}')">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="flex-grow-1">
@@ -777,7 +848,7 @@
                             </div>
                             <div class="text-end">
                                 <small class="text-muted">${time}</small>
-                                ${conv.unread_count > 0 ? `<div class="badge-new mt-1">${conv.unread_count} new</div>` : ''}
+                                ${unread > 0 ? `<div class="unread-dot mt-1">${unread > 99 ? '99+' : unread}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -787,6 +858,9 @@
         
         function viewConversation(conversationId) {
             currentConversationId = conversationId;
+            // Mark as read — clear unread count for this conversation
+            adminUnreadCounts.delete(conversationId);
+            updateUnreadBadges();
             
             AdminChatSocket.viewConversation(conversationId, (data) => {
                 if (data.success) {
@@ -894,19 +968,74 @@
         }
         
         function loadStats() {
-            // Get stats from AdminChatSocket
-            const stats = AdminChatSocket.getStats();
-            if (stats) {
-                document.getElementById('statOpen').textContent = stats.openConversations || 0;
-                document.getElementById('statOnline').textContent = stats.onlineUsers || 0;
-                document.getElementById('statToday').textContent = stats.messagesToday || 0;
-                document.getElementById('statResolved').textContent = stats.resolvedToday || 0;
-            }
+            // Always fetch from REST so the 30-second timer gets truly live data,
+            // not the stale in-memory stats object from the bridge.
+            const token = localStorage.getItem('admin_auth_token');
+            fetch(`${CHAT_API}/api/admin/chat/stats`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(r => r.ok ? r.json() : null)
+            .then(data => {
+                if (!data || !data.stats) return;
+                applyStats(data.stats);
+            })
+            .catch(() => {
+                // Fallback: read whatever the socket last gave us
+                applyStats(AdminChatSocket.getStats());
+            });
+        }
+
+        // applyStats handles both snake_case (REST) and camelCase (bridge) keys
+        function applyStats(s) {
+            if (!s) return;
+            document.getElementById('statOpen').textContent =
+                s.open_conversations    ?? s.openConversations    ?? 0;
+            document.getElementById('statOnline').textContent =
+                s.online_users          ?? s.onlineUsers          ?? 0;
+            document.getElementById('statToday').textContent =
+                s.messages_today        ?? s.messagesToday        ?? 0;
+            document.getElementById('statResolved').textContent =
+                s.resolved_today        ?? s.resolvedToday        ?? 0;
         }
         
         function playNotificationSound() {
-            // Use the built-in notification sound from AdminChatSocket
-            // (It's already implemented in admin-chat-socket.js)
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                // Three ascending tones — C5, E5, G5
+                [[523.25, 0], [659.25, 0.14], [783.99, 0.28]].forEach(([freq, delay]) => {
+                    const osc  = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.001, ctx.currentTime + delay);
+                    gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + delay + 0.015);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.22);
+                    osc.start(ctx.currentTime + delay);
+                    osc.stop(ctx.currentTime + delay + 0.25);
+                });
+            } catch (e) { /* audio context not available */ }
+        }
+
+        // Update the unread counter on the "Open Conversations" stat card
+        // and re-style it when there are unread messages waiting
+        function updateUnreadBadges() {
+            let total = 0;
+            adminUnreadCounts.forEach(v => { total += v; });
+
+            const badge = document.getElementById('statOpenUnread');
+            const card  = badge && badge.closest('.stats-card');
+            if (!badge) return;
+
+            if (total > 0) {
+                badge.textContent = total > 99 ? '99+ new' : `${total} new`;
+                badge.style.display = 'inline-flex';
+                if (card) card.classList.add('has-unread-messages');
+            } else {
+                badge.style.display = 'none';
+                if (card) card.classList.remove('has-unread-messages');
+            }
         }
 
         // ── Registrations Tab ────────────────────────────────────────────────────

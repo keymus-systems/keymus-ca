@@ -44,7 +44,16 @@ const AdminChatSocketBridge = (function () {
         });
 
         KeymusChatSocket.on('admin:stats', (data) => {
-            stats = data.stats || {};
+            const raw = data.stats || {};
+            // Normalize snake_case server keys → camelCase used by the UI
+            stats = {
+                openConversations:    parseInt(raw.open_conversations    ?? raw.openConversations    ?? 0),
+                resolvedConversations:parseInt(raw.resolved_conversations?? raw.resolvedConversations?? 0),
+                resolvedToday:        parseInt(raw.resolved_today        ?? raw.resolvedToday        ?? 0),
+                messagesToday:        parseInt(raw.messages_today        ?? raw.messagesToday        ?? 0),
+                onlineUsers:          parseInt(raw.online_users          ?? raw.onlineUsers          ?? 0),
+                totalMessages:        parseInt(raw.total_messages        ?? raw.totalMessages        ?? 0),
+            };
             _emit('statsUpdated', stats);
         });
 
@@ -52,8 +61,6 @@ const AdminChatSocketBridge = (function () {
             conversations.unshift(data.conversation);
             _emit('newConversation', data.conversation); // emit just the conversation object, not the full {conversation, user} wrapper
             _emit('conversationsUpdated', conversations);
-            // Play notification sound
-            _playNotificationSound();
         });
 
         KeymusChatSocket.on('admin:new-message', (data) => {
@@ -79,7 +86,6 @@ const AdminChatSocketBridge = (function () {
             }
 
             _emit('conversationsUpdated', conversations);
-            _playNotificationSound();
         });
 
         KeymusChatSocket.on('admin:conversation-resolved', (data) => {
