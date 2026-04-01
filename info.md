@@ -32,7 +32,7 @@ ____
 CHAT_PORT=3001
 
 # PostgreSQL connection string
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/keymus_chat
+DATABASE_URL=postgresql://postgres:KaiKoder2024@localhost:5432/keymus_chat
 
 # JWT secret - MUST match the main backend's JWT secret
 JWT_SECRET=zY3QuqBioZYD8NUIHMzD7MDutJvIYuGOk0sMZqhNN1E
