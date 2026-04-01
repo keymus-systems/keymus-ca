@@ -61,20 +61,34 @@ const KeymusChatSocket = (function () {
                     || localStorage.getItem('auth_token_admin')
                     || localStorage.getItem('auth_token');
             }
-            // Client namespace
+            // Client namespace — never use an admin-role token for /chat
+            function _isAdminToken(t) {
+                try {
+                    const p = JSON.parse(atob(t.split('.')[1]));
+                    return p.role === 'admin';
+                } catch (e) { return false; }
+            }
+
             if (typeof DualAuth !== 'undefined') {
                 const t = DualAuth.getToken('client');
-                if (t) return t;
+                if (t && !_isAdminToken(t)) return t;
             }
             if (typeof SimpleAuth !== 'undefined' && SimpleAuth.getToken) {
                 const t = SimpleAuth.getToken();
-                if (t) return t;
+                if (t && !_isAdminToken(t)) return t;
             }
-            return localStorage.getItem('auth_token')
-                || localStorage.getItem('auth_token_client')
-                || localStorage.getItem('chat_token');
+            // Check localStorage candidates, skipping admin tokens
+            const candidates = [
+                localStorage.getItem('auth_token_client'),
+                localStorage.getItem('chat_token'),
+                localStorage.getItem('auth_token')
+            ];
+            for (const t of candidates) {
+                if (t && !_isAdminToken(t)) return t;
+            }
+            return null;
         } catch (e) {
-            return localStorage.getItem('chat_token') || localStorage.getItem('auth_token');
+            return localStorage.getItem('chat_token');
         }
     }
 

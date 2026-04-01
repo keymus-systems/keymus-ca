@@ -155,6 +155,12 @@ function setupChatNamespace(nsp) {
                 message.sender_name = sender?.display_name;
                 message.sender_avatar = sender?.avatar_url;
 
+                // Keep conversations.updated_at fresh so sidebar ordering is correct
+                await db.query(
+                    'UPDATE conversations SET updated_at = NOW() WHERE id = $1',
+                    [conversationId]
+                ).catch(() => {});
+
                 // Broadcast to all participants in this conversation
                 nsp.to(`conversation:${conversationId}`).emit('chat:new-message', { message });
 

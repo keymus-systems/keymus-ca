@@ -50,7 +50,7 @@ const AdminChatSocketBridge = (function () {
 
         KeymusChatSocket.on('admin:new-conversation', (data) => {
             conversations.unshift(data.conversation);
-            _emit('newConversation', data);
+            _emit('newConversation', data.conversation); // emit just the conversation object, not the full {conversation, user} wrapper
             _emit('conversationsUpdated', conversations);
             // Play notification sound
             _playNotificationSound();

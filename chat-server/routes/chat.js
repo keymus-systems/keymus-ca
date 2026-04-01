@@ -175,6 +175,12 @@ router.post('/conversations/:id/messages', async (req, res) => {
             RETURNING *
         `, [conversationId, userId, sanitized, contentType || 'text']);
 
+        // Keep conversations.updated_at fresh for correct sidebar ordering
+        await db.query(
+            'UPDATE conversations SET updated_at = NOW() WHERE id = $1',
+            [conversationId]
+        ).catch(() => {});
+
         // Attach sender info
         const sender = await db.getOne('SELECT display_name, avatar_url FROM chat_users WHERE id = $1', [userId]);
         message.sender_name = sender?.display_name;

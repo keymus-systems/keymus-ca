@@ -93,6 +93,12 @@ function setupAdminNamespace(nsp, chatNsp) {
                 message.sender_avatar = sender?.avatar_url;
                 message.sender_is_admin = true;
 
+                // Keep conversations.updated_at fresh so sidebar ordering is correct
+                await db.query(
+                    'UPDATE conversations SET updated_at = NOW() WHERE id = $1',
+                    [conversationId]
+                ).catch(() => {});
+
                 // Send to user via /chat namespace
                 chatNsp.to(`conversation:${conversationId}`).emit('chat:new-message', { message });
 
