@@ -3,7 +3,7 @@
 
 class TierManagement {
     constructor() {
-        this.apiBase = 'http://localhost:3001/api/admin/tier-management';
+        this.apiBase = (window.KEYMUS_CHAT_URL || 'http://localhost:3001') + '/api/admin/tier-management';
         this.currentTiers = [];
         this.isEditing = false;
         this.editingId = null;

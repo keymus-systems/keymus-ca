@@ -38,7 +38,7 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/keymus_chat
 JWT_SECRET=zY3QuqBioZYD8NUIHMzD7MDutJvIYuGOk0sMZqhNN1E
 
 # Allowed origins (comma-separated)
-ALLOWED_ORIGINS=http://localhost:8080,http://localhost:3000,http://127.0.0.1:8080,http://localhost:5500
+ALLOWED_ORIGINS=https://keymusecommerce.online,https://www.keymusecommerce.online,http://localhost:8080,http://localhost:3000,http://127.0.0.1:8080,http://localhost:5500
 
 # Guest token expiry
 GUEST_TOKEN_EXPIRY=7d
