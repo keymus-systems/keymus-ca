@@ -46,7 +46,7 @@ async function createAdmin() {
     console.log('\n✅  Admin account ready!');
     console.log('─────────────────────────────');
     console.log('  Username :', row.username);
-    console.log('  Password : Admin@1234');
+    console.log('  Password :', password);
     console.log('─────────────────────────────');
     console.log('⚠️  Change your password after first login.\n');
 

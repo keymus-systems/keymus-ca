@@ -1,10 +1,17 @@
 nginx 
 _______
+# HTTP — redirect everything to HTTPS
 server {
     listen 80;
     server_name keymusecommerce.online www.keymusecommerce.online;
+    return 301 https://$host$request_uri;
+}
 
-    root /var/www/keymus-uk/dist;
+# HTTPS — main site + chat proxy
+server {
+    server_name keymusecommerce.online www.keymusecommerce.online;
+
+    root /var/www/keymus-ca/dist;
     index home.html;
 
     location / {
@@ -12,7 +19,7 @@ server {
     }
 
     location /chat/ {
-        proxy_pass http://127.0.0.1:3001/;  # trailing slash strips the /chat/ prefix before forwarding
+        proxy_pass http://127.0.0.1:3001/;  # trailing slash REQUIRED — strips /chat/ prefix before forwarding
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -22,6 +29,24 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_cache_bypass $http_upgrade;
     }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/keymusecommerce.online/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/keymusecommerce.online/privkey.pem; # managed by Certbot
+}
+
+server {
+    if ($host = www.keymusecommerce.online) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    if ($host = keymusecommerce.online) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen 80;
+    server_name keymusecommerce.online www.keymusecommerce.online;
+    return 404; # managed by Certbot
 }
 
 ___

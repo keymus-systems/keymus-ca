@@ -17,6 +17,11 @@
 const KeymusChatSocket = (function () {
     // ── Config ────────────────────────────────────────────────────────────────
     const CHAT_SERVER_URL = window.KEYMUS_CHAT_URL || 'http://localhost:3001';
+    // On prod, KEYMUS_CHAT_URL ends with '/chat' (nginx proxy prefix).
+    // Socket.IO needs that prefix as its `path` option for WebSocket upgrades.
+    const _isProxied = CHAT_SERVER_URL.includes('/chat');
+    const SOCKET_ORIGIN = _isProxied ? CHAT_SERVER_URL.replace(/\/chat$/, '') : CHAT_SERVER_URL;
+    const SOCKET_PATH   = _isProxied ? '/chat/socket.io' : '/socket.io';
     const SOCKET_IO_CDN = 'https://cdn.socket.io/4.8.1/socket.io.min.js';
     const POLL_INTERVAL = 5000;
 
@@ -169,8 +174,9 @@ const KeymusChatSocket = (function () {
             socket = null;
         }
 
-        socket = io(CHAT_SERVER_URL + namespace, {
+        socket = io(SOCKET_ORIGIN + namespace, {
             auth: { token },
+            path: SOCKET_PATH,
             transports: ['websocket', 'polling'],
             reconnection: true,
             reconnectionDelay: 1000,
