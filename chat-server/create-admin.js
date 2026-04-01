@@ -9,8 +9,8 @@ const { Client } = require('pg');
 const crypto = require('crypto');
 
 async function createAdmin() {
-    const username    = 'admin';
-    const password    = 'Admin@1234';
+    const username    = 'Shaqq';
+    const password    = 'K3ymus@789';
     const displayName = 'Admin';
     const email       = 'admin@keymus.ca';
     const adminId     = 'admin_' + crypto.randomBytes(4).toString('hex');
