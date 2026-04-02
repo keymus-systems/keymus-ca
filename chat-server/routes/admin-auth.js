@@ -21,9 +21,9 @@ router.post('/login', strictLimiter, async (req, res) => {
             return res.status(400).json({ error: 'Username and password are required' });
         }
 
-        // Find admin user
+        // Find admin user (case-insensitive username match)
         const admin = await db.getOne(
-            'SELECT * FROM admin_users WHERE username = $1 AND is_active = TRUE',
+            'SELECT * FROM admin_users WHERE LOWER(username) = $1 AND is_active = TRUE',
             [username.toLowerCase().trim()]
         );
 
