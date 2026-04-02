@@ -6,7 +6,7 @@ body {
 
 /* Enhanced Hero Section */
 .hero-section {
-    background: url('../assets/uploads/keymus/hero.jpeg') no-repeat center center;
+    background: url('../assets/uploads/keymus/hero.jpg') no-repeat center center;
     background-size: cover;
     color: white;
     padding: 120px 0;
@@ -193,6 +193,23 @@ body {
         color: #333;
         background: none;
         border: none;
+    }
+}
+
+/* Navbar font-size fix — prevent links wrapping to two rows */
+@media (min-width: 992px) {
+    .navbar-nav .nav-link {
+        font-size: 0.82rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    .navbar .btn {
+        font-size: 0.82rem;
+        padding: 6px 12px !important;
+        letter-spacing: 0;
+    }
+    .navbar-brand img {
+        height: 45px !important;
     }
 }
 
