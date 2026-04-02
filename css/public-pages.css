@@ -8,11 +8,16 @@ body {
 .hero-section {
     background: url('../assets/uploads/keymus/hero.jpg') no-repeat center center;
     background-size: cover;
+    background-attachment: scroll;
+    image-rendering: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     color: white;
     padding: 120px 0;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    /* overflow:hidden removed — it forces background into a compositor layer
+       shared with animated children, causing sub-pixel blurriness */
 }
 
 .hero-section::before {
@@ -27,14 +32,16 @@ body {
 }
 
 .hero-section .content-box {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 20px;
     color: white;
     display: block;
     position: relative;
     z-index: 2;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     margin-left: 0;
     margin-right: auto;
     text-align: left;
@@ -55,25 +62,9 @@ body {
     }
 }
 
-/* Animated floating elements */
-.hero-section::after {
-    content: '';
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(45deg, #ff6b6b, #ffa726);
-    border-radius: 50%;
-    top: 10%;
-    right: 10%;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-    z-index: 1;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-}
+/* Floating orb removed — animated transforms on pseudo-elements inside
+   a positioned hero section caused the background image to rasterize
+   as a shared GPU layer, producing visible blur. */
 
 /* Enhanced Cards */
 .pea-item, .card {
